@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DecorationWebsiteController!{% endblock %}
+
+{% block body %}
+<h1> Les Sous Catégories </h1>
+
+    <section class="products">
+
+        {% if categories is defined %}
+        {% for category in categories %}
+        <p>
+            <a href= {{ path('decoration_website_subcategories', {id: category.id}) }}> Lien vers les produits de : {{ category.name }} </a>
+        </p>
+        {% endfor %}
+        {% endif %}
+    </section>
+
+{% endblock %} 
