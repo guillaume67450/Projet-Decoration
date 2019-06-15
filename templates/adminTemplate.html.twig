@@ -35,8 +35,36 @@
             </div>
         </nav>
         <div class="container">
-        {% block body %}{% endblock %}
+        
+<div class="row">
+<div class="wrapper col-4">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Bootstrap Sidebar</h3>
         </div>
+
+        <ul class="list-unstyled components">
+            <p>Dummy Heading</p>
+            <li>
+                <a href="#">Liste des catégories</a>
+            </li>
+            <li>
+                <a href="#">Créer une catégorie</a>
+            </li>
+            <li>
+                <a href="#">Liste des produits</a>
+            </li>
+            <li>
+                <a href="#">Créer un produit</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+    {% block body %}{% endblock %}
+
+</div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

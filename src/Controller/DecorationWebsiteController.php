@@ -20,7 +20,7 @@ class DecorationWebsiteController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Category::class);
         $categories = $repo->findBy(['parent_id' => null]);
 
-            return $this->render('decoration_website/categories.html.twig', [
+            return $this->render('decoration_website/categories/categories.html.twig', [
                 'controller_name' => 'DecorationWebsiteController',
                 'categories' => $categories
             ]);
@@ -28,32 +28,61 @@ class DecorationWebsiteController extends AbstractController
 
 
     /**
-     * @Route("/decoration_website/{id}", name="decoration_website_subcategories")
+     * @Route("/decoration_website/{id_category}", name="decoration_website_subcategories")
      */
-    public function subcategories($id) {
+    public function subcategories($id_category) {
 
         $repo = $this->getDoctrine()->getRepository(Category::class);
-        $subcategories = $repo->findBy(['parent_id' => $id]);
+        $subcategories = $repo->findBy(['parent_id' => $id_category]);
 
-        return $this->render('decoration_website/subcategories.html.twig', [
+        return $this->render('decoration_website/categories/subcategories.html.twig', [
             'controller_name' => 'DecorationWebsiteController',
             'categories' => $subcategories
         ]);
     }
 
     /**
-     * @Route("/decoration_website/{id}", name="decoration_website_products")
+     * @Route("/decoration_website/{id_category}/{id_sub_category}/products", name="decoration_website_products")
      */
-    public function show_products($id) {
+    public function show_products($id_category, $id_sub_category) {
 
-        $repo = $this->getDoctrine()->getRepository(Product::class);
-        $products = $repo->findBy(['category_id' => $id]);
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($id_sub_category);
+        $products = $category->getProducts();
 
-        return $this->render('decoration_website/subcategories.html.twig', [
+        return $this->render('decoration_website/products/products.html.twig', [
             'controller_name' => 'DecorationWebsiteController',
-            'products' => $products
+            'products' => $products,
+            'id_parent_category' => $id_category,
         ]);
     }
 
+    /**
+     * @Route("/decoration_website/{id_category}/{id_sub_category}/{id_product}", name="decoration_website_product")
+     */
+    public function show_product($id_category, $id_sub_category,$id_product) {
+
+        $repo = $this->getDoctrine()->getRepository(Product::class);
+        $product = $repo->find($id_product);
+
+        return $this->render('decoration_website/products/product.html.twig', [
+            'controller_name' => 'DecorationWebsiteController',
+            'product' => $product,
+
+        ]);
+    }
+
+    /** 
+     * @Route("/", name="home")
+     */
+    public function accueilSite()
+    {
+        $repo = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repo->findBy(['parent_id' => null]);
+
+            return $this->render('decoration_website/categories/categories.html.twig', [
+                'controller_name' => 'DecorationWebsiteController',
+                'categories' => $categories
+            ]);
+    }
 
 }

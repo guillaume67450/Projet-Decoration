@@ -1,0 +1,19 @@
+{% extends 'adminTemplate.html.twig' %}
+
+{% block title %}Hello DecorationWebsiteController!{% endblock %}
+
+{% block body %}
+<h1> Les Catégories </h1>
+
+    <section class="categories">
+
+        {% if categories is defined %}
+        {% for category in categories %}
+        <p>
+            <a href= {{ path('decoration_website_subcategories', {id_category : category.id}) }}> Lien vers les sous Catégorie de : {{ category.name }} </a>
+        </p>
+        {% endfor %}
+        {% endif %}
+    </section>
+
+{% endblock %} 

@@ -11,8 +11,10 @@
         {% for product in products %}
         <p>
             <p> {{ product.title}}  </p>
-            <p> {{ product.category_id }}
-        </p>
+            <p> {{ product.brand}}  </p>
+            <p> {{ product.description}}  </p> 
+            <a href= {{ path('decoration_website_product', {id_category : id_parent_category, id_sub_category : product.category.id, id_product : product.id }) }}> Lien vers le produit  : {{ product.title }} </a>      
+
         {% endfor %}
         {% endif %}
     </section>

@@ -10,7 +10,7 @@
         {% if categories is defined %}
         {% for category in categories %}
         <p>
-            <a href= {{ path('decoration_website_subcategories', {id: category.id}) }}> Lien vers les produits de : {{ category.name }} </a>
+            <a href= {{ path('decoration_website_products', {id_category : category.parent.id, id_sub_category : category.id }) }}> Lien vers les produits de : {{ category.name }} </a>
         </p>
         {% endfor %}
         {% endif %}

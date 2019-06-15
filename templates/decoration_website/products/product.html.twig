@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DecorationWebsiteController!{% endblock %}
+
+{% block body %}
+<h1> Mon produit </h1>
+
+    <section class="products">
+
+        {% if product is defined %}
+
+            <p> {{ product.title}}  </p>
+            <p> {{ product.brand}}  </p>
+            <p> {{ product.description}}  </p>       
+
+
+        {% endif %}
+    </section>
+
+{% endblock %} 
