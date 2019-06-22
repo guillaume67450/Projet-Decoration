@@ -47,16 +47,31 @@
         <ul class="list-unstyled components">
             <p>Dummy Heading</p>
             <li>
-                <a href="{{ path('categories') }}">Liste des catégories</a>
+                <a href="{{ path('adminCategories') }}">Les catégories</a>
+            </li>
+            <p><font size="2">Liste/Création/Modification/Suppression
+            ________________________________</font></p>
+            <li>
+                <a href="{{ path('adminSubCategories') }}">Les sous-catégories</a>
+            </li>
+            <p><font size="2">Liste/Création/Modification/Suppression
+            ________________________________</font></p>
+            <li>
+                <a href="{{ path('adminProducts') }}">Les produits</a>
+            </li>
+            <p><font size="2">Liste/Création/Modification/Suppression
+            ________________________________</font></p>
+            <li>
+            <a href="{{ path('addCategory') }}">Créer une catégorie</a>
+            <p><font size="2">________________________________</font></p>
             </li>
             <li>
-                <a href="#">Créer une catégorie</a>
+            <a href="{{ path('addSubCategory') }}">Créer une sous-catégorie</a>
+            <p><font size="2">________________________________</font></p>
             </li>
             <li>
-                <a href="#">Liste des produits</a>
-            </li>
-            <li>
-                <a href="#">Créer un produit</a>
+            <a href="{{ path('addProduct') }}">Créer un produit</a>
+            <p><font size="2">________________________________</font></p>
             </li>
         </ul>
     </nav>

@@ -11,6 +11,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+
         for($i=0; $i < 10; $i++){
             $category = new Category();
             $category->setName("NomDeCategorie $i");

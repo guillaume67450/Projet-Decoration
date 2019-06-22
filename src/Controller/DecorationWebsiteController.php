@@ -18,7 +18,7 @@ class DecorationWebsiteController extends AbstractController
     public function categories()
     {
         $repo = $this->getDoctrine()->getRepository(Category::class);
-        $categories = $repo->findBy(['parent_id' => null]);
+        $categories = $repo->findBy(['parent' => null]);
 
             return $this->render('decoration_website/categories/categories.html.twig', [
                 'controller_name' => 'DecorationWebsiteController',
@@ -33,7 +33,7 @@ class DecorationWebsiteController extends AbstractController
     public function subcategories($id_category) {
 
         $repo = $this->getDoctrine()->getRepository(Category::class);
-        $subcategories = $repo->findBy(['parent_id' => $id_category]);
+        $subcategories = $repo->findBy(['parent' => $id_category]);
 
         return $this->render('decoration_website/categories/subcategories.html.twig', [
             'controller_name' => 'DecorationWebsiteController',
@@ -77,8 +77,9 @@ class DecorationWebsiteController extends AbstractController
     public function accueilSite()
     {
         $repo = $this->getDoctrine()->getRepository(Category::class);
-        $categories = $repo->findBy(['parent_id' => null]);
+        $categories = $repo->findBy(['parent' => null]);
 
+            
             return $this->render('decoration_website/categories/categories.html.twig', [
                 'controller_name' => 'DecorationWebsiteController',
                 'categories' => $categories

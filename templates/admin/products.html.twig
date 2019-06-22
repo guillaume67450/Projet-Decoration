@@ -1,0 +1,22 @@
+{% extends 'adminTemplate.html.twig' %}
+
+{% block title %}Hello DecorationWebsiteController!{% endblock %}
+
+{% block body %}
+<h1> Les Produits </h1>
+
+    <section class="products">
+
+        {% if products is defined %}
+        {% for product in products %}
+        <p>
+            {# id : la variable vient de la route @Route("/{id}/editProduct", name="editProduct", methods={"POST"}) #}
+            {{ product.title }} 
+            <a href= {{ path('editProduct', {id : product.id}) }}> Edit </a>
+            {# <a href= {{ path('deleteProduct', {id : product.id}) }}> Delete </a> #}
+        </p>
+        {% endfor %}
+        {% endif %}
+    </section>
+
+{% endblock %} 

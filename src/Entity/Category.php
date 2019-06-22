@@ -43,10 +43,10 @@ class Category
      */
     private $parent;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $parent_id;
+    // /**
+    //  * @ORM\Column(type="integer", nullable=true)
+    //  */
+    // private $parent_id;
 
 
     
@@ -115,15 +115,15 @@ class Category
         return $this;
     }
 
-    public function getParentId(): ?int
-    {
-        return $this->parent_id;
-    }
+    // public function getParentId(): ?int
+    // {
+    //     return $this->parent_id;
+    // }
 
-    public function setParentId(?int $parent_id): self
-    {
-        $this->parent_id = $parent_id;
+    // public function setParentId(?int $parent_id): self
+    // {
+    //     $this->parent_id = $parent_id;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

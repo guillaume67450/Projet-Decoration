@@ -56,7 +56,11 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
             'error'         => $error,
         ]);
+
+        return $this->redirectToRoute('admin');
     }
+
+
 
     /**
      * @Route("deconnexion", name="security_logout")

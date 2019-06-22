@@ -10,10 +10,13 @@
         {% if categories is defined %}
         {% for category in categories %}
         <p>
-            <a href= {{ path('decoration_website_subcategories', {id_category : category.id}) }}> Lien vers les sous Catégorie de : {{ category.name }} </a>
+            {# id : la variable vient de la route @Route("/{id}/edit", name="editCategory", methods={"POST"}) #}
+            <a href= {{ path('editCategory', {id : category.id}) }}>{{ category.name }} </a>
+            <a href= {{ path('editCategory', {id : category.id}) }}> Editer catégorie</a>
+            {# <a href= {{ path('deleteCategory', {id : category.id}) }}> Supprimer catégorie</a> #}
         </p>
         {% endfor %}
         {% endif %}
     </section>
 
-{% endblock %} 
+{% endblock %}

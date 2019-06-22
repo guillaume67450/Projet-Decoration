@@ -1,0 +1,15 @@
+{% extends 'adminTemplate.html.twig' %}
+
+{% block title %}Hello CategoryFormController!{% endblock %}
+
+{% block body %}
+{% if category.name != '' %}
+<h3>Edition de la catégorie</h3>
+{% else %}
+<h3>Ajout de la catégorie</h3>
+{% endif %}
+        {{ form_start(form) }}
+        {{ form_row(form.Name) }}
+        <button type="submit">save</button>
+        {{ form_end(form) }}
+{% endblock %}
