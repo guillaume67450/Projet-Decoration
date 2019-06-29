@@ -28,7 +28,7 @@ class AppFixtures extends Fixture
                         $product->setTitle("Titre Produit $i - $j - $k")
                                 ->setBrand("Marque $i - $j - $k")
                                 ->setDescription("Description zaertyyirezoopipo $i - $j - $k qgsdhjklkmjm $i - $j - $k")
-                                ->setPhotos("Photo $i - $j - $k")
+                                //->setPhotos("Photo $i - $j - $k")
                                 ->setURLaffiliation("https://www.google.fr")
                                 ->setCategory($Subcategory);            
                         $manager->persist($product);

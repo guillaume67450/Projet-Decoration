@@ -3,20 +3,24 @@
 {% block title %}Hello DecorationWebsiteController!{% endblock %}
 
 {% block body %}
-<h1> Les Sous-Catégories </h1>
+<div class="row">
+    <div class="col-md-auto">
+    <h1> Les Sous-Catégories </h1>
 
-    <section class="categories">
+        <section class="categories">
 
-        {% if categories is defined %}
-        {% for category in categories %}
-        <p>
-            {# id : la variable vient de la route @Route("/{id}/edit", name="subCategoryForm", methods={"POST"}) #}
-            <a href= {{ path('productForm', {id : category.id, type : 'category'}) }}>{{ category.name }} </a>
-            <a href= {{ path('subCategoryForm', {id : category.id}) }}> Editer catégorie</a>
-            {# <a href= {{ path('deleteCategory', {id : category.id}) }}> Supprimer catégorie</a> #}
-        </p>
-        {% endfor %}
-        {% endif %}
-    </section>
+            {% if categories is defined %}
+            {% for category in categories %}
+            <p>
+                {# id : la variable vient de la route @Route("/{id}/edit", name="subCategoryForm", methods={"POST"}) #}
+                <a href= {{ path('productForm', {id : category.id, type : 'category'}) }}>{{ category.name }} </a>
+                <a href= {{ path('subCategoryForm', {id : category.id}) }}> Editer catégorie</a>
+                {# <a href= {{ path('deleteCategory', {id : category.id}) }}> Supprimer catégorie</a> #}
+            </p>
+            {% endfor %}
+            {% endif %}
+        </section>
+    </div>
+</div>
 
 {% endblock %}

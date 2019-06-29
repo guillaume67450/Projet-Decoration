@@ -3,6 +3,8 @@
 {% block title %}Hello ProductFormController!{% endblock %}
 
 {% block body %}
+<div class="row">
+<div class="col-md-auto">
 {% if product.title != '' %}
 <h3>Edition du produit</h3>
 {% else %}
@@ -13,8 +15,12 @@
         {{ form_row(form.Brand) }}
         {{ form_row(form.Description) }}
         {{ form_row(form.URLaffiliation) }}
+        
+        {{ form_row(form.Category) }}
         <button type="submit">save</button>
         {{ form_end(form) }}
+</div>
+</div>
 {% endblock %}
 
 

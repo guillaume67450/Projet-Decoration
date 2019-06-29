@@ -9,16 +9,50 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class ProductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+
+        /*
+->add('Photos', FileType::class, [
+                'label' => 'Photo (jpg ou jpeg)',
+
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+
+                // make it optional so you don't have to re-upload the image
+                // everytime you edit the Product details
+                'required' => false,
+
+                // unmapped fields can't define their validation using annotations
+                // in the associated entity, so you can use the PHP constraint classes
+                'constraints' => [
+                    new File([
+                        'maxSize' => '8000k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/gif',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid image',
+                    ])
+                ],
+            ])
+            // ...
+            //, FileType::class, [    'label' => 'Photos (image jpg ou jpeg)',   'multiple' => true  ])
+            // ->add('Photos', FileType::class, ['label' => 'Photos (image jpg ou jpeg)'])
+
+        */
         $builder
             ->add('Title')
             ->add('Brand')
             ->add('Description')
-            ->add('Photos')
+            
             ->add('URLaffiliation')
             ->add('Category', EntityType::class, [
                 // looks for choices from this entity

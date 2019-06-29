@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @Vich\Uploadable
  */
 class Product
 {
@@ -32,12 +34,7 @@ class Product
     private $Description;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $Photos;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $URLaffiliation;
 
@@ -46,6 +43,11 @@ class Product
      * @ORM\JoinColumn(nullable=false)
      */
     private $Category;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
 
     public function getId(): ?int
     {
@@ -88,18 +90,6 @@ class Product
         return $this;
     }
 
-    public function getPhotos(): ?string
-    {
-        return $this->Photos;
-    }
-
-    public function setPhotos(?string $Photos): self
-    {
-        $this->Photos = $Photos;
-
-        return $this;
-    }
-
     public function getURLaffiliation(): ?string
     {
         return $this->URLaffiliation;
@@ -123,4 +113,28 @@ class Product
 
         return $this;
     }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    // public function getPhotos(): ?string
+    // {
+    //     return $this->Photos;
+    // }
+
+    // public function setPhotos(?string $Photos): self
+    // {
+    //     $this->Photos = $Photos;
+
+    //     return $this;
+    // }
 }

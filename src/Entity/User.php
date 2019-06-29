@@ -100,8 +100,15 @@ class User implements UserInterface
         
     public function getSalt() {} 
         
-    public function getRoles() {
-        return ['ROLE_USER']; 
+    public function getRoles() { // on utilise ici la fonction map pour transformer la collection de rôles en tableau afin de pouvoir exploiter les rôles sous forme de chaines de caractères
+        // il n'y a pas besoin d'insérer les rôles utilisateurs dans la base de données : ils sont insérés automatiquement ici
+        $roles = $this->userRoles->map(function($role){
+            return $role->getTitle();
+        })->toArray();
+
+        $roles[] = 'ROLE_USER';
+
+        return $roles;
     }
 
     /**

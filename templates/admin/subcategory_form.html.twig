@@ -3,14 +3,18 @@
 {% block title %}Hello CategoryFormController!{% endblock %}
 
 {% block body %}
+<div class="row">
+<div class="col-md-auto">
 {% if category.name != '' %}
-<h3>Edition de la catégorie</h3>
+<h3>Edition de la sous-catégorie</h3>
 {% else %}
-<h3>Ajout de la catégorie</h3>
+<h3>Ajout de sous-catégorie</h3>
 {% endif %}
         {{ form_start(form) }}
         {{ form_row(form.Name) }}
         {{ form_row(form.Parent) }}
         <button type="submit">save</button>
         {{ form_end(form) }}
+</div>
+</div>
 {% endblock %}

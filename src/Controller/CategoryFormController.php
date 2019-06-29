@@ -34,7 +34,7 @@ class CategoryFormController extends AbstractController
      */
     public function showSubCategories(Category $category = null)
     {
-        // NOTE doctrine orm repository where not
+        // NOTE recherche google : doctrine orm repository where not
         // https://stackoverflow.com/a/25421102
         $repo = $this->getDoctrine()->getRepository(Category::class);
 
