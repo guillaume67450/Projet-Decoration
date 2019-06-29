@@ -17,7 +17,7 @@
                 {# id : la variable vient de la route @Route("/admin/productForm/{id}/{type}", name="productForm") #}
                 {{ product.title }}
                 <a href= {{ path('productForm', {id : product.id, type : 'product'}) }}> <i class="fas fa-edit"></i> </a>
-                <a href= {{ path('deleteProduct', {id : product.id}) }}> Supprimer le produit</a>
+                <a href= {{ path('deleteProduct', {id : product.id}) }}> <i class="fa fa-window-close" aria-hidden="true"></i>   Supprimer le produit</a>
                 {# <a href= {{ path('deleteProduct', {id : product.id}) }}> Delete </a> #}
             </p>
             {% endfor %}
