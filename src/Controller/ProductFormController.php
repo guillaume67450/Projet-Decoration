@@ -51,16 +51,37 @@ class ProductFormController extends AbstractController
         ]);
     }
 
-
     /**
-
-     * @Route("/{id}/editProduct", name="editProduct", methods={"GET","POST"})
-
+     * @Route("admin/product/{id}/{type}", name="productForm", defaults={"id"=null,"type"=null}, methods={"GET","POST"})
      */
-
-    public function editProduct(Request $request, Product $product): Response
-
+    public function productForm(Request $request, string $id = null, string $type = null) : Response
     {
+        if (!isset($id))
+        {
+            $product = new Product();
+        }
+        else
+        {
+            switch ($type)
+            {
+                case 'category' :
+                    // NOTE Get category by id
+                    $catRepo  = $this->getDoctrine()->getRepository(Category::class);
+                    $category = $catRepo->findOneBy(['id' => $id]);
+                    // NOTE Set category to new product
+                    $product = new Product();
+                    $product->setCategory($category);
+                    break;
+                case 'product' :
+                    // NOTE Get product by id
+                    $proRepo = $this->getDoctrine()->getRepository(Product::class);
+                    $product = $proRepo->findOneBy(['id' => $id]);
+                    break;
+                default :
+                    $product = new Product();
+                    break;
+            }
+        }
 
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -68,12 +89,11 @@ class ProductFormController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) 
         {
             $this->getDoctrine()->getManager()->flush();
-            return $this-> redirectToRoute('adminProducts');
+            return $this->redirectToRoute('adminProducts');
         }
 
-
         return $this->render('admin/product_form.html.twig', [
-            'form' => $form->createView(),
+            'form'    => $form->createView(),
             'product' => $product,
         ]);
     }

@@ -3,8 +3,9 @@
 namespace App\Repository;
 use App\Entity\Category;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Category|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,22 +20,21 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
-    // /**
-    //  * @return Category[] Returns an array of Category objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findByParentNull($executed = false)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        // Add a not equals parameter to your criteria
+        $criteria = new Criteria();
+        $criteria->where(Criteria::expr()->neq('parent', null));
+
+        // Prepare query builder
+        $qb = $this->createQueryBuilder('c')->addCriteria($criteria);
+
+        if (!$executed)
+            return $qb;
+
+        // Execute query
+        return $qb->getQuery()->getResult();
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Category

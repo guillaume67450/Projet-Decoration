@@ -10,9 +10,9 @@
         {% if products is defined %}
         {% for product in products %}
         <p>
-            {# id : la variable vient de la route @Route("/{id}/editProduct", name="editProduct", methods={"POST"}) #}
-            {{ product.title }} 
-            <a href= {{ path('editProduct', {id : product.id}) }}> Edit </a>
+            {# id : la variable vient de la route @Route("/admin/productForm/{id}/{type}", name="productForm") #}
+            {{ product.title }}
+            <a href= {{ path('productForm', {id : product.id, type : 'product'}) }}> Edit </a>
             {# <a href= {{ path('deleteProduct', {id : product.id}) }}> Delete </a> #}
         </p>
         {% endfor %}
