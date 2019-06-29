@@ -12,6 +12,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 
+use Artgris\Bundle\MediaBundle\Form\Type\MediaType;
+use Artgris\Bundle\MediaBundle\Form\Type\MediaCollectionType;
+
 class ProductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -54,6 +57,15 @@ class ProductType extends AbstractType
             ->add('Description')
             
             ->add('URLaffiliation')
+            ->add('Image', MediaType::class, [
+                'conf' => 'default'
+            ])
+            ->add('Gallery', MediaCollectionType::class, [
+                'conf' => 'default',
+                'entry_options' => [
+                    'display_file_manager' => true
+                ]
+            ])
             ->add('Category', EntityType::class, [
                 // looks for choices from this entity
                 'class' => Category::class,

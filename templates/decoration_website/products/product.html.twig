@@ -9,6 +9,19 @@
 
         {% if product is defined %}
 
+            {% if product.image is defined %}
+                <div>
+                    <img src="{{ product.image }}" class="img-fluid" alt="{{ product.title }}">
+                </div>
+            {% endif %}
+
+            {% for image in product.gallery %}
+                <div>
+                    <img src="{{ image }}" class="img-fluid" alt="{{ product.title }}">
+                </div>
+            {% endfor %}
+
+
             <p> {{ product.title}}  </p>
             <p> {{ product.brand}}  </p>
             <p> {{ product.description}}  </p>       

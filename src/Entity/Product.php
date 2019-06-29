@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+use Artgris\Bundle\MediaBundle\Form\Validator\Constraint as MediaAssert; // optionnal, to force image files
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  * @Vich\Uploadable
@@ -44,22 +46,20 @@ class Product
      */
     private $Category;
 
+    // NOTE https://github.com/artgris/mediaBundle
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $image;
+    private $Image;
 
     /**
-     * @Vich\UploadableField(mapping="product_images", fileNameProperty="image")
-     * @var File
+     * @var Collection|string[]
+     * @ORM\Column(type="simple_array", nullable=true)
+     * @MediaAssert\Image()
      */
-    private $imageFile;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
+    private $Gallery;
 
     public function __construct()
     {
@@ -132,57 +132,54 @@ class Product
         return $this;
     }
 
-    public function getImage(): ?string
+
+
+    /**
+     * Get the value of Gallery
+     *
+     * @return  Collection|string[]
+     */ 
+    public function getGallery()
     {
-        return $this->image;
+        return $this->Gallery;
     }
 
-    public function setImage(?string $image): self
+    /**
+     * Set the value of Gallery
+     *
+     * @param  Collection|string[]  $Gallery
+     *
+     * @return  self
+     */ 
+    public function setGallery($Gallery)
     {
-        $this->image = $image;
+        $this->Gallery = $Gallery;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    /**
+     * Get the value of Image
+     *
+     * @return  string
+     */ 
+    public function getImage()
     {
-        return $this->updatedAt;
+        return $this->Image;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    /**
+     * Set the value of Image
+     *
+     * @param  string  $Image
+     *
+     * @return  self
+     */ 
+    public function setImage(?string $Image): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->Image = $Image;
 
         return $this;
     }
 
-    public function setImageFile(File $image = null)
-    {
-        $this->imageFile = $image;
-
-        // VERY IMPORTANT:
-        // It is required that at least one field changes if you are using Doctrine,
-        // otherwise the event listeners won't be called and the file is lost
-        if ($image) {
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new \DateTime('now');
-        }
-    }
-
-    public function getImageFile()
-    {
-        return $this->imageFile;
-    }
-
-    // public function getPhotos(): ?string
-    // {
-    //     return $this->Photos;
-    // }
-
-    // public function setPhotos(?string $Photos): self
-    // {
-    //     $this->Photos = $Photos;
-
-    //     return $this;
-    // }
 }

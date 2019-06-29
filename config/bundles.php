@@ -16,4 +16,7 @@ return [
     Symfony\Bundle\WebServerBundle\WebServerBundle::class => ['dev' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
+    Artgris\Bundle\FileManagerBundle\ArtgrisFileManagerBundle::class => ['all' => true],
+    Gregwar\ImageBundle\GregwarImageBundle::class => ['all' => true],
+    Artgris\Bundle\MediaBundle\ArtgrisMediaBundle::class => ['all' => true],
 ];
