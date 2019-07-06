@@ -61,6 +61,11 @@ class Product
      */
     private $Gallery;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $Price;
+
     public function __construct()
     {
         $this->updatedAt = new \DateTime('now');
@@ -178,6 +183,18 @@ class Product
     public function setImage(?string $Image): self
     {
         $this->Image = $Image;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->Price;
+    }
+
+    public function setPrice(?float $Price): self
+    {
+        $this->Price = $Price;
 
         return $this;
     }

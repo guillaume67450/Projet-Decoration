@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DecorationWebsiteController!{% endblock %}
+
+{% block body %}
+
+
+<nav class="navbar navbar-inverse">
+<div class="container-fluid">
+    <form class="d-inline navbar-form navbar-right inline-form">
+    <div class="d-inline form-group">
+        <input type="search" class="d-inline input-sm form-control" placeholder="Recherche">
+        <div class="d-inline select-box">
+            <select>
+                <option value="All Categories">All Categories !!!</option>
+                <option value="Category Demo 1">Category zzzz 1</option>
+                <option value="Category Demo 2">Category zzzz 2</option>
+                <option value="Category Demo 3">Category zzzz 3</option>
+            </select>
+        </div>
+        <button type="submit" class="d-inline btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Chercher </button>
+    </div>
+    </form>
+</div>
+</nav>
+
+
+
+<div class="main-header">
+    <div class="box-search">
+        <form class="search-form search-form6 clearfix">
+            <input type="text" value="Search" onfocus="if (this.value==this.defaultValue) this.value = ''" onblur="if (this.value=='') this.value = this.defaultValue">
+            <div class="select-box">
+                <select>
+                    <option value="All Categories">All Categories</option>
+                    <option value="Category Demo 1">Category Demo 1</option>
+                    <option value="Category Demo 2">Category Demo 2</option>
+                    <option value="Category Demo 3">Category Demo 3</option>
+                </select>
+            </div>
+            <div class="submit-from">
+                <input type="submit" value="">
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="display-3">Hello, world!</h1>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+      </div>
+    </div>
+
+    <div class="box-slider">
+				<div class="wrap-item" data-navigation="true" data-pagination="true" data-itemscustom="[[0,1]]" data-autoplay="false" data-transition="fade">
+					<div class="wrap-slide">
+						<div class="box-img">
+							<a href="#"><img src="images/slide/slide-1.jpg" alt="" /></a>
+						</div>
+						<div class="box-info-slide">
+							<div class="container">
+								<div class="adv-info-slide">
+									<h2 class="animated" data-animated="fadeInLeftBig">good shop</h2>
+									<h3 class="animated" data-animated="flipInX">up to 50% off</h3>
+									<a href="#" class="animated has-bottom" data-animated="bounceInLeft">shop now</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wrap-slide">
+						<div class="box-img box-img-2">
+							<a href="#"><img src="images/slide/slide-2.jpg" alt="" /></a>
+						</div>
+						<div class="box-info-slide">
+							<div class="container">
+								<div class="adv-info-slide">
+									<h2 class="animated" data-animated="fadeInLeftBig">supper shop</h2>
+									<h3 class="animated" data-animated="flipInX">out top trend</h3>
+									<a href="#" class="animated has-bottom" data-animated="bounceInLeft">shop now</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wrap-slide">
+						<div class="box-img box-img-3">
+							<a href="#"><img src="images/slide/slide-3.jpg" alt="" /></a>
+						</div>
+						<div class="box-info-slide">
+							<div class="container">
+								<div class="adv-info-slide">
+									<h2 class="animated" data-animated="fadeInLeftBig">alo shop</h2>
+									<h3 class="animated" data-animated="flipInX">out top seller</h3>
+									<a href="#" class="animated has-bottom" data-animated="bounceInLeft">shop now</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+    </div>
+
+
+
+
+
+
+<h1> Les Produits </h1>
+
+    <section class="products">
+    <div class="row w-12">
+        {% if products is defined %}
+        {% for product in products %}
+
+            {% if product.image is defined %}
+
+            
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                    <img src="{{ product.image }}" height="200" width="200" alt="{{ product.title }}">
+                <div class="d-flex justify-content-center"> {{ product.price}}  € </div> 
+                </div>
+
+ {# class="img-fluid" #}
+
+            {% endif %}
+            {# <a href= {{ path('decoration_website_product', {id_category : id_parent_category, id_sub_category : product.category.id, id_product : product.id }) }}> Lien vers le produit  : {{ product.title }} </a>       #}
+            
+        {% endfor %}
+        {% endif %}
+    </div>
+    </section>
+
+{% endblock %} 

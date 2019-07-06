@@ -76,14 +76,13 @@ class DecorationWebsiteController extends AbstractController
      */
     public function accueilSite()
     {
-        $repo = $this->getDoctrine()->getRepository(Category::class);
-        $categories = $repo->findBy(['parent' => null]);
+        $repo = $this->getDoctrine()->getRepository(Product::class);
+        $products = $repo->findAll();
 
-            
-            return $this->render('decoration_website/categories/categories.html.twig', [
-                'controller_name' => 'DecorationWebsiteController',
-                'categories' => $categories
-            ]);
+        return $this->render('decoration_website/products/HomeProducts.html.twig', [
+            'products' => $products,
+            'controller_name' => 'DecorationWebsiteController',
+        ]);
     }
 
 }

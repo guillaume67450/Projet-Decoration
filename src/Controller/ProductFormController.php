@@ -29,7 +29,6 @@ class ProductFormController extends AbstractController
             $form = $this->createForm(ProductType::class, $product);
             $form->handleRequest($request);
 
-            echo "ok";
             if ($form->isSubmitted() && $form->isValid()) { /*
                 //NOTE https://youtu.be/eGREghzYaYI tuto qui est censé être simple
                 $uploads_directory = $this->getParameter('uploads_directory');
@@ -50,7 +49,7 @@ class ProductFormController extends AbstractController
                 */
 
 //-------------------------------------------------------------------- 2é méthode
-                echo "2";
+
             /* @var UploadedFile $photoFile */
             //$photoFile = $form['Photos']->getData();
             
@@ -85,7 +84,6 @@ class ProductFormController extends AbstractController
             //return $this->redirect($this->generateUrl('app_product_list'));
             return $this-> redirectToRoute('adminProducts');
         } else {
-            echo "ok pour le else";
 
             foreach ($form->getErrors(true) as $error) {
                 echo $error->getMessage();

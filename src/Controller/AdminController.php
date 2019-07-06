@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
-use App\Entity\Product;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
