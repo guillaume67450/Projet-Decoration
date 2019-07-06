@@ -1,3 +1,5 @@
+//  dropdown menu des catégories sur la page d'accueil 
+
 $('.dropdown-menu a.dropdown-toggle').hover(function() {
   if (!$(this).next().hasClass('show')) {
     $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");

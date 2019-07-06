@@ -72,3 +72,8 @@
   </div>
 
 {% endblock %}
+{% block javascript %}
+  {{ parent() }}
+    {# homescript.js #}
+    <script type="text/javascript" src="{{ asset('assets/js/homescript.js') }}"></script>
+{% endblock %}
