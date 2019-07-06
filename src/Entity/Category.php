@@ -52,6 +52,7 @@ class Category
     
     public function __construct()
     {
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
         $this->Products = new ArrayCollection();
     }
 
@@ -113,6 +114,11 @@ class Category
         $this->parent = $parent;
 
         return $this;
+    }
+
+    public function getChildren()
+    {
+        return $this->children;
     }
 
     // public function getParentId(): ?int
