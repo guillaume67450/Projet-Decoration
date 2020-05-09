@@ -55,7 +55,6 @@ class ProductType extends AbstractType
             ->add('Title')
             ->add('Brand')
             ->add('Description')
-            
             ->add('URLaffiliation')
             ->add('Image', MediaType::class, [
                 'conf' => 'default'
@@ -69,18 +68,16 @@ class ProductType extends AbstractType
             ->add('Category', EntityType::class, [
                 // looks for choices from this entity
                 'class' => Category::class,
-                'query_builder' => function (CategoryRepository $cr)
-                {
+                'query_builder' => function (CategoryRepository $cr) {
                     return $cr->findByParentNull();
                 },
                 // uses the Category.name property as the visible option string
                 'choice_label' => 'name',
-            
+
                 // used to render a select box, check boxes or radios
                 // 'multiple' => true,
                 // 'expanded' => true,
-            ]);
-        ;
+            ]);;
     }
 
     public function configureOptions(OptionsResolver $resolver)

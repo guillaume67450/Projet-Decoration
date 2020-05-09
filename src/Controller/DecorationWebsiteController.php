@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
 use App\Entity\Category;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -25,7 +27,6 @@ class DecorationWebsiteController extends AbstractController
                 'categories' => $categories
             ]);
     }
-
 
     /**
      * @Route("/decoration_website/{id_category}", name="decoration_website_subcategories")
@@ -60,6 +61,21 @@ class DecorationWebsiteController extends AbstractController
      * @Route("/decoration_website/{id_category}/{id_sub_category}/{id_product}", name="decoration_website_product")
      */
     public function show_product($id_category, $id_sub_category,$id_product) {
+
+        $repo = $this->getDoctrine()->getRepository(Product::class);
+        $product = $repo->find($id_product);
+
+        return $this->render('decoration_website/products/product.html.twig', [
+            'controller_name' => 'DecorationWebsiteController',
+            'product' => $product,
+
+        ]);
+    }
+
+    /**
+     * @Route("/decoration_website/product/{id_product}", name="decoration_website_product_by_id")
+     */
+    public function show_product_by_id($id_product) {
 
         $repo = $this->getDoctrine()->getRepository(Product::class);
         $product = $repo->find($id_product);

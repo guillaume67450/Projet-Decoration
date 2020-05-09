@@ -1,79 +1,85 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DecorationWebsiteController!
+{% block title %} 
+	DecorationWebsite
+{% endblock %}
+
+{% block stylesheets %}     
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 {% endblock %}
 
 {% block body %}
 
-  <div class="container py-3">
-
-    <div class="dropdown show">
-      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Categories
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        {% for category in categories if not category.parent %}
-          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">{{ category.Name }}</a>
-              <ul class="dropdown-menu">
-              {% for subcategory in category.children %}
-                <li><a class="dropdown-item" href="#">{{ subcategory.Name }}</a></li>
-              {% endfor %}
-            </ul>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-
-  </div>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron jumbotron-fluid"> 
+		<h2 class="display-4">Tous vos produits déco à petits prix</h2>
+</div>
 
 
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <aside class="col-12 col-md-2 p-0 bg-light">
+      <nav class="navbar navbar-expand navbar-dark bg-light flex-md-column flex-row align-items-start">
+        <div class="collapse navbar-collapse">
+          <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+            <h3 class="text-secondary">Produits par catégorie :</h3>
+            {% for category in categories %}
+				{% if category.parent is null %}
+				<li class="nav-item">
+				<a class="nav-link text-primary pl-0" href="{{ path('decoration_website_subcategories', {'id_category': category.id}) }}">{{ category.name }}</a>
+				</li>
+				{% endif %}
+            {% endfor %}  
+          </ul>
+        </div>
+      </nav>
+    </aside>
+    <main class="col">
+      <!-- Insérez ici le contenu principal du site ou de l'application -->
     <div class="container">
-      <h1 class="display-3">Hello, world!</h1>
-      <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-      <p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a>
-      </p>
-    </div>
+
+		<h1>Les Produits</h1>
+
+		<div class="row my-3">
+			{% if products is defined %}
+				{% for product in products %}
+					<div class="col-4 col-sm-3 my-3 my-sm-0">
+						<div class="card">
+							<div class="position-relative">
+								<img src="{{ product.image }}" class="card-img-top" alt="{{ product.title }}">
+								<div class="card-img-overlay d-flex justify-content-end align-items-end">
+									<button type="button" class="btn btn-light rounded-circle" data-toggle="button" aria-pressed="false" autocomplete="off">
+										Liker
+									</button>
+								</div>
+							</div>
+							<div class="card-body text-center">
+								<h5 class="card-title">
+									<small>{{ product.title }}</small>
+								</h5>
+								<p class="card-text">
+									<a href={{ path('decoration_website_product_by_id', {id_product : product.id } ) }}>
+										<del class="text-danger">{{ product.price }}	€</del>
+										{% if product.reducedprice is not null %}
+											<strong class="text-success">{{ product.reducedprice }} €</strong>
+										{% endif %}
+									</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+    </main>
+
   </div>
+</div>
 
-
-  <div class="container">
-    <h1>
-      Les Produits
-    </h1>
-
-    <section class="products">
-      <div class="row w-12">
-        {% if products is defined %}
-          {% for product in products %}
-
-            {% if product.image is defined %}
-
-
-              <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                <img src="{{ product.image }}" height="200" width="200" alt="{{ product.title }}">
-                <div class="d-flex justify-content-center">
-                  {{ product.price}}
-                  €
-                </div>
-              </div>
-
-              {# class="img-fluid" #}
-
-            {% endif %}
-            {# <a href= {{ path('decoration_website_product', {id_category : id_parent_category, id_sub_category : product.category.id, id_product : product.id }) }}> Lien vers le produit  : {{ product.title }} </a>       #}
-
-          {% endfor %}
-        {% endif %}
-      </div>
-    </section>
-  </div>
 
 {% endblock %}
-{% block javascript %}
-  {{ parent() }}
-    {# homescript.js #}
-    <script type="text/javascript" src="{{ asset('assets/js/homescript.js') }}"></script>
+
+{% block javascripts %}
+	{{ parent() }}
 {% endblock %}

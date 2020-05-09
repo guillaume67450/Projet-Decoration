@@ -3,31 +3,67 @@
 {% block title %}Hello DecorationWebsiteController!{% endblock %}
 
 {% block body %}
-<h1> Mon produit </h1>
 
-    <section class="products">
-
-        {% if product is defined %}
-
-            {% if product.image is defined %}
-                <div>
-                    <img src="{{ product.image }}" class="img-fluid" alt="{{ product.title }}">
-                </div>
-            {% endif %}
-
-            {% for image in product.gallery %}
-                <div>
-                    <img src="{{ image }}" class="img-fluid" alt="{{ product.title }}">
-                </div>
-            {% endfor %}
-
-
-            <p> {{ product.title}}  </p>
-            <p> {{ product.brand}}  </p>
-            <p> {{ product.description}}  </p>       
-
-
+<!-- Page Content -->
+  <div class="container">
+    {% if product.image is defined %}
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="card mt-4">
+        {% if product.image is defined %}
+          <img class="card-img-top img-fluid" src="{{ product.image }}" alt="{{ product.title }}">
         {% endif %}
-    </section>
+          <div class="card-body">
+            <h3 class="card-title">{{ product.title }}</h3>
+            <p><strong> {{ product.brand}}  </strong></p>
+            <del class="text-danger">{{ product.price }}	€</del>
+                {% if product.reducedprice is not null %}
+                    <strong>{{ product.reducedprice }} €</strong>
+                {% endif %}
+            <p class="card-text">{{ product.description }}</p>
+            <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+            4.0 stars
+          </div>
+        </div>
+        <!-- /.card -->
+
+        <div class="row">
+            {% for image in product.gallery %} 
+            <div class="col-4 col-sm-3 my-3 my-sm-0">
+                <div class="card">
+                    <div class="position-relative">
+                        <img src="{{ image }}" class="card-img-top" alt="{{ product.title }}">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+            Product Reviews
+          </div>
+          <div class="card-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+            <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+            <hr>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+            <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+            <hr>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+            <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+            <hr>
+            <a href="#" class="btn btn-success">Leave a Review</a>
+          </div>
+        </div>
+        <!-- /.card -->
+        {% endif %}
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+
+  </div>
+  <!-- /.container -->
 
 {% endblock %} 

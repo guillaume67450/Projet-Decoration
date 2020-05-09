@@ -1,22 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DecorationWebsiteController!{% endblock %}
+{% block title %}Hello DecorationWebsiteController!
+{% endblock %}
 
 {% block body %}
-<h1> Les Produits </h1>
+<div class="container">
+	<h1>
+		Les Produits
+	</h1>
 
-    <section class="products">
+	{% if products is defined %}
+		{% for product in products %}
+			<div class="row pt-3">
+				<table class="table table-striped col-4 col-sm-3 my-3 my-sm-0">
+					<tbody>
+						<tr>
+                            <td>Produit :</td>
+                            <td>
+                                {{ product.title}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Catégorie :</td>
+                            <td>
+                                {{ product.category.name }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Marque :</td>
+                            <td>
+                                {{ product.brand}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Détail produit :</td>
+                            <td>
+                                <a href={{ path('decoration_website_product', {id_category : id_parent_category, id_sub_category : product.category.id, id_product : product.id } ) }}>
+                                    page du produit
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+				</table>
+            {% if product.image is defined %}
+                <div class="col-4 col-sm-3 my-3 my-sm-0">
+                    <div class="card pl-4">
+                        <img src="{{ product.image }}" class="card-img-top" alt="{{ product.title }}">
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+		{% endfor %}
+	{% endif %}
+</div>
 
-        {% if products is defined %}
-        {% for product in products %}
-        <p>
-            <p> {{ product.title}}  </p>
-            <p> {{ product.brand}}  </p>
-            <p> {{ product.description}}  </p> 
-            <a href= {{ path('decoration_website_product', {id_category : id_parent_category, id_sub_category : product.category.id, id_product : product.id }) }}> Lien vers le produit  : {{ product.title }} </a>      
-
-        {% endfor %}
-        {% endif %}
-    </section>
-
-{% endblock %} 
+{% endblock %}

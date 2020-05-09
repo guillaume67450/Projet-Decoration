@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class CategoryFormController extends AbstractController
+class CategoryController extends AbstractController
 {
     /**
      * @Route("/admin/categories", name="adminCategories")
@@ -27,7 +27,7 @@ class CategoryFormController extends AbstractController
         return $this->render('admin/categories.html.twig', [
             'categories' => $categories,
         ]);
-    } 
+    }
 
     /**
      * @Route("/admin/subcategories/{id}", name="adminSubCategories", defaults={"id"=null})

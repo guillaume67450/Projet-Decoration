@@ -66,6 +66,11 @@ class Product
      */
     private $Price;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $ReducedPrice;
+
     public function __construct()
     {
         $this->updatedAt = new \DateTime('now');
@@ -195,6 +200,18 @@ class Product
     public function setPrice(?float $Price): self
     {
         $this->Price = $Price;
+
+        return $this;
+    }
+
+    public function getReducedPrice(): ?float
+    {
+        return $this->ReducedPrice;
+    }
+
+    public function setReducedPrice(?float $ReducedPrice): self
+    {
+        $this->ReducedPrice = $ReducedPrice;
 
         return $this;
     }

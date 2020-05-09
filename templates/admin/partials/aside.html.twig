@@ -1,0 +1,42 @@
+<aside class="col-12 col-md-2 p-0 bg-light">
+    <nav class="navbar navbar-expand navbar-dark bg-light flex-md-column flex-row align-items-start">
+        <div class="collapse navbar-collapse">
+            <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+                <h4>Gestion et organisation</h4>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary pl-0" href="{{ path('adminCategories') }}">
+                    <i class="fas fa-list    "></i>
+                    Catégories
+                    </a>
+                </li>
+                    <ul>
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary pl-0" href="{{ path('categoryForm') }}">Créer une catégorie</a>
+                        </li>
+                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary pl-0" href="{{ path('adminSubCategories') }}">
+                    <i class="fas fa-list-ol    "></i>
+                    Sous catégories
+                    </a>
+                </li>
+                    <ul>
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary pl-0" href="{{ path('subCategoryForm') }}">Créer une sous catégorie</a>
+                        </li>
+                    </ul>
+                <li class="nav-item"> <!-- toujours penser à mettre le a avant le i pour que le i ne déborde pas -->
+                    <a class="nav-link text-secondary pl-0" href="{{ path('adminProducts') }}">
+                    <i class="fa fa-product-hunt" aria-hidden="true"></i>
+                    Produits
+                    </a>
+                </li>
+                    <ul>
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary pl-0" href="{{ path('productForm') }}">Créer un produit</a>
+                        </li>
+                    </ul>
+            </ul>
+        </div>
+    </nav>
+</aside>

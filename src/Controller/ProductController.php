@@ -14,10 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 
-
-
-
-class ProductFormController extends AbstractController
+class ProductController extends AbstractController
 {
     /**
      * @Route("/admin/product", name="addProduct")

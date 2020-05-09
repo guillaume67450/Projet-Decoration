@@ -43,6 +43,16 @@ class Category
      */
     private $parent;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Image;
+
+    /**
+     * @ORM\Column(type="string", length=800, nullable=true)
+     */
+    private $Introduction;
+
     // /**
     //  * @ORM\Column(type="integer", nullable=true)
     //  */
@@ -119,6 +129,30 @@ class Category
     public function getChildren()
     {
         return $this->children;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->Image;
+    }
+
+    public function setImage(?string $Image): self
+    {
+        $this->Image = $Image;
+
+        return $this;
+    }
+
+    public function getIntroduction(): ?string
+    {
+        return $this->Introduction;
+    }
+
+    public function setIntroduction(?string $Introduction): self
+    {
+        $this->Introduction = $Introduction;
+
+        return $this;
     }
 
     // public function getParentId(): ?int

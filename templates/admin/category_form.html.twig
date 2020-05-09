@@ -1,19 +1,33 @@
-{% extends 'adminTemplate.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}Hello CategoryFormController!{% endblock %}
+{% block title %}Catégories
+{% endblock %}
 
 {% block body %}
-<div class="row">
-<div class="col-md-auto">
-{% if category.name != '' %}
-<h3>Edition de la catégorie</h3>
-{% else %}
-<h3>Ajout de la catégorie</h3>
-{% endif %}
-        {{ form_start(form) }}
-        {{ form_row(form.Name) }}
-        <button type="submit">save</button>
-        {{ form_end(form) }}
-</div>
-</div>
+
+	<div class="container-fluid h-100 my-4">
+		<div class="row h-100">
+			{% include 'admin/partials/aside.html.twig' %}
+			<main	class="col">
+				<!-- Insérez ici le contenu principal du site ou de l'application -->
+				<div class="container">
+
+					<div class="row">
+						<div class="col-md-auto">
+							{% if category.name != '' %}
+								<h3>Edition de la catégorie</h3>
+							{% else %}
+								<h3>Création d'une nouvelle catégorie</h3>
+							{% endif %}
+							{{ form_start(form) }}
+							{{ form_row(form.Name) }}
+							<button type="submit">Sauvegarder</button>
+							{{ form_end(form) }}
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+
 {% endblock %}
