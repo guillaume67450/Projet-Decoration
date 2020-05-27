@@ -1,85 +1,273 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} 
-	DecorationWebsite
+{% block title %}
+	DecorationWebsite home
 {% endblock %}
 
-{% block stylesheets %}     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 {% endblock %}
 
 {% block body %}
+	<main class="col">
+		<!-- Insérez ici le contenu principal du site ou de l'application -->
+		<!--Main layout-->
+			<div class="container"> <div
+				class="row">
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron jumbotron-fluid"> 
-		<h2 class="display-4">Tous vos produits déco à petits prix</h2>
-</div>
+				<!--Sidebar-->
+				<div class="col-lg-4 wow fadeIn" data-wow-delay="0.2s">
 
+					<div class="widget-wrapper">
+						<h4>Catégories :</h4>
+						<br>
+						<div class="list-group">
+							{% for category in categories %}
+								{% if category.parent is null %}
+									<a class="list-group-item" href="{{ path('decoration_website_subcategories', {'id_category': category.id}) }}">{{ category.name }}</a>
+								{% else %}
+								<a class="list-group-item" href="{{ path('decoration_website_products', {id_category : category.parent.id, id_sub_category : category.id }) }}">{{ category.name }} <small>({{category.parent.name}})</small></a>
+								{% endif %}
+							{% endfor %}
+						</div>
+					</div>
 
-<div class="container-fluid h-100">
-  <div class="row h-100">
-    <aside class="col-12 col-md-2 p-0 bg-light">
-      <nav class="navbar navbar-expand navbar-dark bg-light flex-md-column flex-row align-items-start">
-        <div class="collapse navbar-collapse">
-          <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
-            <h3 class="text-secondary">Produits par catégorie :</h3>
-            {% for category in categories %}
-				{% if category.parent is null %}
-				<li class="nav-item">
-				<a class="nav-link text-primary pl-0" href="{{ path('decoration_website_subcategories', {'id_category': category.id}) }}">{{ category.name }}</a>
-				</li>
-				{% endif %}
-            {% endfor %}  
-          </ul>
-        </div>
-      </nav>
-    </aside>
-    <main class="col">
-      <!-- Insérez ici le contenu principal du site ou de l'application -->
-    <div class="container">
-
-		<h1>Les Produits</h1>
-
-		<div class="row my-3">
-			{% if products is defined %}
-				{% for product in products %}
-					<div class="col-4 col-sm-3 my-3 my-sm-0">
+					<div class="widget-wrapper wow fadeIn" data-wow-delay="0.4s">
+						<h4>Formulaire de souscription :</h4>
+						<br>
 						<div class="card">
-							<div class="position-relative">
-								<img src="{{ product.image }}" class="card-img-top" alt="{{ product.title }}">
-								<div class="card-img-overlay d-flex justify-content-end align-items-end">
-									<button type="button" class="btn btn-light rounded-circle" data-toggle="button" aria-pressed="false" autocomplete="off">
-										Liker
-									</button>
-								</div>
-							</div>
-							<div class="card-body text-center">
-								<h5 class="card-title">
-									<small>{{ product.title }}</small>
-								</h5>
-								<p class="card-text">
-									<a href={{ path('decoration_website_product_by_id', {id_product : product.id } ) }}>
-										<del class="text-danger">{{ product.price }}	€</del>
-										{% if product.reducedprice is not null %}
-											<strong class="text-success">{{ product.reducedprice }} €</strong>
-										{% endif %}
-									</a>
+							<div class="card-block">
+								<p>
+									<strong>Souscrivez à notre bulletin hebdmadaire</strong>
 								</p>
+								<p>Une fois par semaine nous vous enverrons un récapitulatif des promotions et des actualités</p>
+								<div class="md-form">
+									<i class="fa fa-user prefix"></i>
+									<input type="text" id="form1" class="form-control">
+									<label for="form1">Votre nom</label>
+								</div>
+								<div class="md-form">
+									<i class="fa fa-envelope prefix"></i>
+									<input type="text" id="form2" class="form-control">
+									<label for="form2">Votre email</label>
+								</div>
+								<button class="btn btn-default">Envoyer</button>
+
 							</div>
 						</div>
 					</div>
-				{% endfor %}
-			{% endif %}
+
+				</div>
+				<!--/.Sidebar-->
+
+				<!--Main column-->
+				<div
+					class="col-lg-8">
+
+					<!--First row-->
+					<div class="row wow fadeIn" data-wow-delay="0.4s">
+						<div class="col-lg-12">
+							<div class="divider-new">
+								<h2 class="h2-responsive">Les nouvelles</h2>
+							</div>
+
+
+							<!--Carousel Wrapper-->
+							<div
+								id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+								<!--Indicators-->
+								<ol class="carousel-indicators">
+									<li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+									<li data-target="#carousel-example-1z" data-slide-to="1"></li>
+									<li data-target="#carousel-example-1z" data-slide-to="2"></li>
+								</ol>
+								<!--/.Indicators-->
+								<!--Slides-->
+								<div
+									class="carousel-inner" role="listbox">
+									<!--First slide-->
+									<div class="carousel-item active">
+										<img src="https://s3-eu-west-1.amazonaws.com/sc-files.pjms.fr/p/pjms/274/000/421/673/c7789181f74d4e008bc472b28803fd07.jpg" alt="First slide">
+										<div class="carousel-caption">
+											<h4>Nouvelle collection</h4>
+											<br>
+										</div>
+									</div>
+									<!--/First slide-->
+									<!--Second slide-->
+									<div class="carousel-item">
+										<img src="https://s3-eu-west-1.amazonaws.com/sc-files.pjms.fr/p/pjms/274/000/421/673/0c8cfa956bfc41498268c23f7815bf64.jpg" alt="Second slide">
+										<div class="carousel-caption">
+											<h4>Obtenez une réduction !</h4>
+											<br>
+										</div>
+									</div>
+									<!--/Second slide-->
+									<!--Third slide-->
+									<div class="carousel-item">
+										<img src="https://s3-eu-west-1.amazonaws.com/sc-files.pjms.fr/p/pjms/274/000/421/673/2a88174d4070444e9e6b587b64a7d344.jpg" alt="Third slide">
+										<div class="carousel-caption">
+											<h4>A partir de 20€</h4>
+											<br>
+										</div>
+									</div>
+									<!--/Third slide-->
+								</div>
+								<!--/.Slides-->
+								<!--Controls-->
+								<a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="sr-only">Précédent</span>
+								</a>
+								<a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="sr-only">Suivant</span>
+								</a>
+								<!--/.Controls-->
+							</div>
+							<!--/.Carousel Wrapper-->
+						</div>
+					</div>
+					<!--/.First row-->
+					<br>
+					<hr
+					class="extra-margins">
+
+					<!--Second row-->
+					<div
+						class="row">
+						<!--First columnn-->
+						<div
+							class="col-lg-4">
+							<!--Card-->
+							<div
+								class="card  wow fadeIn" data-wow-delay="0.2s">
+
+								<!--Card image-->
+								<div class="view overlay hm-white-slight">
+									<img src="/uploads/section_meubles.jpg" class="img-fluid" alt="">
+									<a href="#">
+										<div class="mask"></div>
+									</a>
+								</div>
+								<!--/.Card image-->
+
+								<!--Card content-->
+								<div
+									class="card-block">
+									<!--Title-->
+									<h4 class="card-title">Meubles</h4>
+									<!--Text-->
+									<p class="card-text">Les meubles tendance</p>
+									<a href="#" class="btn btn-default">A partir de
+										<strong>20€</strong>
+									</a>
+								</div>
+								<!--/.Card content-->
+
+							</div>
+							<!--/.Card-->
+						</div>
+						<!--First columnn-->
+
+						<!--Second columnn-->
+						<div
+							class="col-lg-4">
+							<!--Card-->
+							<div
+								class="card  wow fadeIn" data-wow-delay="0.4s">
+
+								<!--Card image-->
+								<div class="view overlay hm-white-slight">
+									<img src="https://s3-eu-west-1.amazonaws.com/sc-files.pjms.fr/p/pjms/274/000/421/673/0c8cfa956bfc41498268c23f7815bf64.jpg" class="img-fluid" alt="">
+									<a href="#">
+										<div class="mask"></div>
+									</a>
+								</div>
+								<!--/.Card image-->
+
+								<!--Card content-->
+								<div
+									class="card-block">
+									<!--Title-->
+									<h4 class="card-title">Luminaires</h4>
+									<!--Text-->
+									<p class="card-text">Nos plus beaux luminaires
+									</p>
+									<a href="#" class="btn btn-default">A partir de
+										<strong>10€</strong>
+									</a>
+								</div>
+								<!--/.Card content-->
+
+							</div>
+							<!--/.Card-->
+						</div>
+						<!--Second columnn-->
+
+						<!--Third columnn-->
+						<div
+							class="col-lg-4">
+							<!--Card-->
+							<div
+								class="card  wow fadeIn" data-wow-delay="0.6s">
+
+								<!--Card image-->
+								<div class="view overlay hm-white-slight">
+									<img src="https://s3-eu-west-1.amazonaws.com/sc-files.pjms.fr/p/pjms/274/000/421/673/2a88174d4070444e9e6b587b64a7d344.jpg" class="img-fluid" alt="">
+									<a href="#">
+										<div class="mask"></div>
+									</a>
+								</div>
+								<!--/.Card image-->
+
+								<!--Card content-->
+								<div
+									class="card-block">
+									<!--Title-->
+									<h4 class="card-title">Canapés</h4>
+									<!--Text-->
+									<p class="card-text">Les plus beaux canapés</p>
+									<a href="#" class="btn btn-default">A partir de
+										<strong>100€</strong>
+									</a>
+								</div>
+								<!--/.Card content-->
+
+							</div>
+							<!--/.Card-->
+						</div>
+						<!--Third columnn-->
+					</div>
+					<!--/.Second row-->
+
+				</div>
+				<!--/.Main column-->
+
+			</div>
 		</div>
+		<!--/.Main layout-->
+
+	</main>
+
+	<hr class="extra-margins">
+	<h1 class="text-center">Sélection de Produits</h1>
+
+	<div id="columns" class="columns_4">
+		{% if products is defined %}
+			{% for product in products|slice(1, 16) %}
+				<figure>
+					<img src="{{ product.image }}" alt="{{ product.title }}">
+					<figcaption>{{ product.title }}</figcaption>
+					<span class="price">{{ product.price }}
+						€</span>
+					<a class="button btn-primary" href="#">Acheter</a>
+				</figure>
+			{% endfor %}
+		{% endif %}
 	</div>
-    </main>
-
-  </div>
-</div>
-
 
 {% endblock %}
-
 {% block javascripts %}
 	{{ parent() }}
 {% endblock %}

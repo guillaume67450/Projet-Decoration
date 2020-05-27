@@ -1,21 +1,127 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DecorationWebsiteController!{% endblock %}
+{% block title %}Hello DecorationWebsiteController!
+{% endblock %}
 
 {% block body %}
-<h1> Sous-catégories </h1>
+	<main class="col">
+		<!-- Insérez ici le contenu principal du site ou de l'application -->
+		<!--Main layout-->
+			<div class="container"> <div
+				class="row">
+				<!--Sidebar-->
+				<div class="col-lg-4 wow fadeIn" data-wow-delay="0.2s">
 
-    <section class="products">
+					<div class="widget-wrapper">
+						<h4>Sous-catégories :</h4>
 
-        {% if categories is defined %}
-        {% for category in categories %}
-        <p>
-            <a href= {{ path('decoration_website_products', {id_category : category.parent.id, id_sub_category : category.id }) }}> Lien vers les produits de : {{ category.name }} </a>
-        </p>
-        {% endfor %}
-        {% endif %}
-    </section>
+						<div class="list-group">
+							{% for category in categories %}
+								<a class="list-group-item" href="{{ path('decoration_website_products', {id_category : category.parent.id, id_sub_category : category.id }) }}">{{ category.name }}</a>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+				<!--/.Sidebar-->
 
-    
+				<!--Main column-->
+				<div
+					class="col-lg-8">
 
-{% endblock %} 
+					<!--First row-->
+					<div class="row wow fadeIn" data-wow-delay="0.4s">
+						<div class="col-lg-12">
+							<div class="divider-new">
+								<h2 class="h2-responsive">{{categorie.name}}</h2>
+							</div>
+
+
+							<!--Carousel Wrapper-->
+							<div
+								id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+								<!--Indicators-->
+								<ol class="carousel-indicators">
+									<li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+								</ol>
+								<!--/.Indicators-->
+								<!--Slides-->
+								<div
+									class="carousel-inner" role="listbox">
+									<!--First slide-->
+									<div class="carousel-item active">
+										<img class="d-block w-100" src="{{ categorie.image }}" alt="slide">
+										<div class="carousel-caption">
+											<h4 class="text-dark">{{ categorie.introduction|raw}}</h4>
+											<br>
+										</div>
+									</div>
+									<!--/First slide-->
+
+									<!--/.Slides-->
+								</div>
+								<!--/.Carousel Wrapper-->
+							</div>
+						</div>
+						<!--/.First row-->
+						<br>
+						<hr
+						class="extra-margins">
+                        
+						<!--Second row-->
+                        <div class="row wow fadeIn pt-5" data-wow-delay="0.4s">
+                            <div class="col-lg-12">
+                                <div class="divider-new">
+                                    <h2 class="h2-responsive">Consulter</h2>
+                                </div>
+                            </div>
+						<div
+							class="row">
+                            {% for category in categories %}
+                                <!--First columnn-->
+                                <div
+                                    class="col-lg-4">
+                                    <!--Card-->
+                                    <div
+                                        class="card  wow fadeIn" data-wow-delay="0.2s">
+
+                                        <!--Card image-->
+                                        <div class="view overlay hm-white-slight">
+                                            <img src="{{category.image}}" class="img-fluid" alt="">
+                                            <a href="#">
+                                                <div class="mask"></div>
+                                            </a>
+                                        </div>
+                                        <!--/.Card image-->
+
+                                        <!--Card content-->
+                                        <div
+                                            class="card-block">
+                                            <!--Title-->
+                                            <h4 class="card-title">{{category.name}}</h4>
+                                            <!--Text-->
+                                            <p class="card-text">{{category.introduction}}</p>
+                                            <a href="{{ path('decoration_website_products', {id_category : category.parent.id, id_sub_category : category.id }) }}" class="btn btn-default">
+                                                voir les produits
+                                            </a>
+                                        </div>
+                                        <!--/.Card content-->
+
+                                    </div>
+                                    <!--/.Card-->
+                                </div>
+                                <!--First columnn-->
+                            {% endfor %}
+
+                            <!--/.Second row-->
+
+					</div>
+					<!--/.Main column-->
+
+				</div>
+			</div>
+			<!--/.Main layout-->
+
+		</main>
+
+
+	{% endblock %}

@@ -24,7 +24,7 @@ class CategoryController extends AbstractController
             ['parent' => null]
         );
 
-        return $this->render('admin/categories.html.twig', [
+        return $this->render('admin/category/index.html.twig', [
             'categories' => $categories,
         ]);
     }
@@ -43,58 +43,8 @@ class CategoryController extends AbstractController
         else
             $categories = $repo->findByParentNull(true);
 
-        return $this->render('admin/sub_categories.html.twig', [
+        return $this->render('admin/subcategory/index.html.twig', [
             'categories' => $categories,
-        ]);
-    }
-    
-    /**
-     * @Route("/admin/category/{id}", name="categoryForm", defaults={"id"=null})
-     */
-    public function categoryForm(Request $request, Category $category = null) : Response
-    {
-        if (!isset($category))
-            $category = new Category();
-
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            // $category->setCreateDate(new Date());
-            $entityManager->persist($category);
-            $entityManager->flush();
-            return $this->redirectToRoute('adminCategories');
-        }
-        
-        return $this->render('admin/category_form.html.twig', [
-            'form'     => $form->createView(),
-            'category' => $category,
-        ]);
-    }
-
-    /**
-     * @Route("/admin/subcategory/{id}", name="subCategoryForm", defaults={"id"=null})
-     */
-    public function subCategoryForm(Request $request, Category $category = null) : Response
-    {
-        if (!isset($category))
-            $category = new Category();
-
-        $form = $this->createForm(SubCategoryType::class, $category);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            // $category->setCreateDate(new Date());
-            $entityManager->persist($category);
-            $entityManager->flush();
-            return $this-> redirectToRoute('adminSubCategories');
-        }
-
-        return $this->render('admin/subcategory_form.html.twig', [
-            'form'     => $form->createView(),
-            'category' => $category,
         ]);
     }
 

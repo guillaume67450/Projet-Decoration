@@ -4,6 +4,14 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+        <!-- Font Awesome >
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"-->
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css" rel="stylesheet">
         {{ encore_entry_link_tags('app') }}
         <script src="https://kit.fontawesome.com/0add7e0883.js" crossorigin="anonymous"></script>
         {% block stylesheets %}
@@ -45,6 +53,8 @@
         </nav>
 
         {% block body %}{% endblock %}
+
+        {% include 'admin/partials/footer.html.twig' %}   
 
         {% block javascripts %} 
         {# bloc qui contient les scripts du template de base pour les visiteurs #}

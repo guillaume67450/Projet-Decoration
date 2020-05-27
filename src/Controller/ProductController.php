@@ -17,83 +17,6 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/admin/product", name="addProduct")
-     */
-    public function addNewProduct(Request $request) : Response
-    {
-        // NOTE: https://symfony.com/doc/current/controller/upload_file.html
-            $product = new Product();
-            $form = $this->createForm(ProductType::class, $product);
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) { /*
-                //NOTE https://youtu.be/eGREghzYaYI tuto qui est censé être simple
-                $uploads_directory = $this->getParameter('uploads_directory');
-                //$product->setCreateDate(new Date());
-                //NOTE get array of photos
-                $photos = $request->files->get('post')['Photos'];
-
-                //NOTE loop through the photos
-                foreach ($photos as $photo)
-                {
-                    $filename = md5(uniqid()) . '.' . $photo->guessExtension();
-                
-                    $photo->move(
-                        $uploads_directory,
-                        $filename
-                    );
-                }
-                */
-
-//-------------------------------------------------------------------- 2é méthode
-
-            /* @var UploadedFile $photoFile */
-            //$photoFile = $form['Photos']->getData();
-            
-            // this condition is needed because the 'Photos' field is not required
-            // so the image file must be processed only when a file is uploaded
-            /*if ($photoFile) {
-                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    $photoFile->move(
-                        $this->getParameter(root . '/uploads/images/'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-
-                // updates the 'photoFilename' property to store the jpeg/bmp file name
-                // instead of its contents
-                $product->setphotoFilename($newFilename);
-            }*/
-
-            // ... persist the $product variable or any other work
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($product);
-            $entityManager->flush();
-            //return $this->redirect($this->generateUrl('app_product_list'));
-            return $this-> redirectToRoute('adminProducts');
-        } else {
-
-            foreach ($form->getErrors(true) as $error) {
-                echo $error->getMessage();
-            }
-        }
-        
-        return $this->render('admin/product_form.html.twig', [
-            'form' => $form->createView(),
-            'product' => $product,
-        ]);
-    }
-
-    /**
      * @Route("/admin/product/delete/{id}", name="deleteProduct")
      * @Method({"DELETE"})
      */
@@ -105,21 +28,6 @@ class ProductController extends AbstractController
         $response = new Response();
         $response->send();
         return $this-> redirectToRoute('adminProducts');
-    }
-
-    /**
-     * @Route("/admin/products", name="adminProducts")
-     */
-    public function showProducts()
-    {
-
-        $repo = $this->getDoctrine()->getRepository(Product::class);
-        $products = $repo->findAll();
-
-        return $this->render('admin/products.html.twig', [
-            'products' => $products,
-            'controller_name' => 'AdminController',
-        ]);
     }
 
     /**
@@ -163,7 +71,7 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('adminProducts');
         }
 
-        return $this->render('admin/product_form.html.twig', [
+        return $this->render('admin/product/_form.html.twig', [
             'form'    => $form->createView(),
             'product' => $product,
         ]);

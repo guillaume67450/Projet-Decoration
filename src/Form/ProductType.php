@@ -55,6 +55,7 @@ class ProductType extends AbstractType
             ->add('Title')
             ->add('Brand')
             ->add('Description')
+            ->add('Price')
             ->add('URLaffiliation')
             ->add('Image', MediaType::class, [
                 'conf' => 'default'

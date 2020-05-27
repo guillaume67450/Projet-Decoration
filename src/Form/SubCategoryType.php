@@ -6,6 +6,7 @@ use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Artgris\Bundle\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SubCategoryType extends AbstractType
@@ -14,6 +15,10 @@ class SubCategoryType extends AbstractType
     {
         $builder
             ->add('Name')
+            ->add('Introduction')
+            ->add('Image', MediaType::class, [
+                'conf' => 'default'
+            ])
             ->add('Parent', EntityType::class, [
                 'required' => false,
                 'class' => Category::class,

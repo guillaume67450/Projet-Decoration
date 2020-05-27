@@ -1,57 +1,141 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DecorationWebsiteController!
+{% block title %}Produits de la catégorie {{ category.name }}
 {% endblock %}
 
 {% block body %}
-<div class="container">
-	<h1>
-		Les Produits
-	</h1>
+	<main class="col">
+		<!-- Insérez ici le contenu principal du site ou de l'application -->
+		<!--Main layout-->
+			<div class="container"> <div
+				class="row">
+				<!--Sidebar-->
+				<div class="col-lg-4 wow fadeIn" data-wow-delay="0.2s">
 
-	{% if products is defined %}
-		{% for product in products %}
-			<div class="row pt-3">
-				<table class="table table-striped col-4 col-sm-3 my-3 my-sm-0">
-					<tbody>
-						<tr>
-                            <td>Produit :</td>
-                            <td>
-                                {{ product.title}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Catégorie :</td>
-                            <td>
-                                {{ product.category.name }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Marque :</td>
-                            <td>
-                                {{ product.brand}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Détail produit :</td>
-                            <td>
-                                <a href={{ path('decoration_website_product', {id_category : id_parent_category, id_sub_category : product.category.id, id_product : product.id } ) }}>
+					<div class="widget-wrapper">
+						<h4>Sous-Catégorie : "{{ category.name }}"</h4>
+
+						<div class="list-group">
+							{% for product in products %}
+								<a class="list-group-item" href="{{ path('decoration_website_product', {id_category : id_parent_category, id_sub_category : product.category.id, id_product : product.id }) }}">{{product.title}}</a>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+				<!--/.Sidebar-->
+
+				<!--Main column-->
+				<div
+					class="col-lg-8">
+
+					<!--First row-->
+					<div class="row wow fadeIn" data-wow-delay="0.4s">
+						<div class="col-lg-12">
+							<div class="divider-new">
+								<h2 class="h2-responsive">{{ category.name }}</h2>
+							</div>
+
+
+							<!--Carousel Wrapper-->
+							<div
+								id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+								<!--Indicators-->
+								<ol class="carousel-indicators">
+									<li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+								</ol>
+								<!--/.Indicators-->
+								<!--Slides-->
+								<div
+									class="carousel-inner" role="listbox">
+									<!--First slide-->
+									<div class="carousel-item active">
+										<img class="d-block w-100" src="{{ category.image }}" alt="slide">
+										<div class="carousel-caption">
+											<h4 class="text-dark">{{ category.introduction }}</h4>
+											<br>
+										</div>
+									</div>
+									<!--/First slide-->
+
+									<!--/.Slides-->
+								</div>
+								<!--/.Carousel Wrapper-->
+							</div>
+						</div>
+						<!--/.First row-->
+						<br>
+						<hr
+						class="extra-margins">
+                    
+
+						<!--Second row-->
+                        <div class="row wow fadeIn pt-5" data-wow-delay="0.4s">
+                            <div class="col-lg-12">
+                                <div class="divider-new">
+                                    <h2 class="h2-responsive">Consulter</h2>
+                                </div>
+                            </div>
+						<div
+							class="row">
+                            {% for product in products %}
+                                <!--First columnn-->
+                                <div
+                                    class="col-lg-4">
+                                    <!--Card-->
+                                    <div
+                                        class="card  wow fadeIn" data-wow-delay="0.2s">
+
+                                        <!--Card image-->
+                                        <div class="view overlay hm-white-slight">
+                                            <img src="{{product.image}}" class="img-fluid" alt="">
+                                            <a href="#">
+                                                <div class="mask"></div>
+                                            </a>
+                                        </div>
+                                        <!--/.Card image-->
+
+                                        <!--Card content-->
+                                        <div
+                                            class="card-block">
+                                            <!--Title-->
+                                            <h4 class="card-title">{{product.title}}</h4>
+                                            <!--Text-->
+                                            <p class="card-text">{{product.description}}</p>
+                                                <a href={{ path('decoration_website_product', {id_category : id_parent_category, id_sub_category : product.category.id, id_product : product.id }) }}>
+                                                    page du produit
+                                                </a>
+                                        </div>
+                                        <!--/.Card content-->
+
+                                    </div>
+                                    <!--/.Card-->
+                                </div>
+                                <!--First columnn-->
+                            {% endfor %}
+
+                            <!--/.Second row-->
+
+					</div>
+					<!--/.Main column-->
+
+				</div>
+			</div>
+			<!--/.Main layout-->
+
+		</main>
+                                <!--p>Détail produit :</p>
+
+                                <a href={#{ path('decoration_website_product', {id_category : id_parent_category, id_sub_category : product.category.id, id_product : product.id }) }}>
                                     page du produit
                                 </a>
-                            </td>
-                        </tr>
-                    </tbody>
-				</table>
-            {% if product.image is defined %}
+                                {{ product.category.name }}
+
+                                            {% if product.image is defined %}
                 <div class="col-4 col-sm-3 my-3 my-sm-0">
                     <div class="card pl-4">
-                        <img src="{{ product.image }}" class="card-img-top" alt="{{ product.title }}">
-                    </div>
-                {% endif %}
-                </div>
-            </div>
-		{% endfor %}
-	{% endif %}
-</div>
+                        <img src="{{ product.image }}" class="card-img-top" alt="{{ product.title }#}">
+                    </div-->
+                {#% endif %#}
 
-{% endblock %}
+	{% endblock %}
+

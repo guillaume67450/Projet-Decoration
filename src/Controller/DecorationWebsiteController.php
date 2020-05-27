@@ -34,11 +34,12 @@ class DecorationWebsiteController extends AbstractController
     public function subcategories($id_category) {
 
         $repo = $this->getDoctrine()->getRepository(Category::class);
+        $categorie = $repo->find($id_category);
         $subcategories = $repo->findBy(['parent' => $id_category]);
 
         return $this->render('decoration_website/categories/subcategories.html.twig', [
-            'controller_name' => 'DecorationWebsiteController',
-            'categories' => $subcategories
+            'categories'    => $subcategories,
+            'categorie'      => $categorie
         ]);
     }
 
@@ -51,8 +52,8 @@ class DecorationWebsiteController extends AbstractController
         $products = $category->getProducts();
 
         return $this->render('decoration_website/products/products.html.twig', [
-            'controller_name' => 'DecorationWebsiteController',
             'products' => $products,
+            'category' => $category,
             'id_parent_category' => $id_category,
         ]);
     }

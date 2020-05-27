@@ -1,0 +1,44 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modification du produit numéro
+	{{product.id}}
+{% endblock %}
+
+{% form_theme form _self %}
+
+{% block body %}
+	<div class="container-fluid h-100 my-4">
+		<div class="row h-100">
+			{% include 'admin/partials/aside.html.twig' %}
+			<main class="col">
+	<div class="container">
+		<h1 class="my-5">Modification du produit
+			{{product.title}}</h1>
+
+		{{ form_start(form) }}
+
+		<div class="row">
+			<div class="col sm-col-2 md-col-4 lg-col-6">
+				<div class="card bg-light">
+					<div class="card-header">
+						<h4 class="card-title">Modifier le produit ?</h4>
+					</div>
+					<div class="card-body">
+						{{ form_widget(form) }}
+
+						<button type="submit" class="btn btn-primary">
+							<i class="fas fa-check"></i>
+							Enregistrer les modifications
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		{{ form_end(form) }}
+	</div>
+    </div>
+    </div>
+    </main>
+{% endblock %}

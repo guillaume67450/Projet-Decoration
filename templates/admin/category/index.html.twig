@@ -1,0 +1,72 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}
+	Gestion des catégories
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid h-100 my-4">
+		<div class="row h-100">
+			{% include 'admin/partials/aside.html.twig' %}
+			<main
+				class="col">
+				<!-- Insérez ici le contenu principal du site ou de l'application -->
+
+				<section class="categories">
+
+					<h2>Gestion des catégories</h2>
+					<div class="table-responsive">
+						<table class="table table-hover">
+							{% if categories is defined %}
+								<thead>
+									<tr>
+										<th>Id</th>
+										<th>Nom de la catégorie</th>
+										<th>Image</th>
+										<th class="text-center w-25">Introduction</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+
+
+									{% for category in categories %}
+
+
+										<tr>
+											<td>{{category.id}}</td>
+											<td>{{category.name}}</td>
+											<td>
+												<img src="{{category.image}}" alt="Image de {{category.name}}" class="miniature">
+											</td>
+											<td class="text-center w-25">
+												{{category.introduction|raw}}
+											</td>
+											<td>
+												{# id : la variable vient de la route @Route("/{id}/edit", name="categoryForm", methods={"POST"}) #}
+												<a href="{{ path('adminSubCategories', {id : category.id}) }}" class="btn btn-secondary" title="voir les sous-catégories de {{ category.name }}">
+													<i class="fas fa-eye"></i>
+												</a>
+												{# id : la variable vient de la route @Route("/{id}/edit", name="categoryForm", methods={"POST"}) #}
+												<a href="{{ path('categoryForm', {'id': category.id})}}" class="btn btn-primary" title="éditer la catégorie {{ category.name }}">
+													<i class="fas fa-edit"></i>
+												</a>
+												<a href="{{ path('admin_categories_delete', {'id': category.id})}}" class="btn btn-danger" title="supprimer la catégorie {{ category.name }}">
+														<i class="fas fa-trash-alt"></i>
+												</a>
+
+												<!--a href="{#{ path('deleteCategory', {'id': category.id})}#}" class="btn btn-danger">
+												                                                                <i class="fas fa-trash"></i>
+												                                                            </a-->
+											</td>
+										</tr>
+									{% endfor %}
+                                </tbody>
+							{% endif %}	    
+						</table>
+					</div>
+				</section>
+            </main>
+        </div>
+    </div>{% endblock %}

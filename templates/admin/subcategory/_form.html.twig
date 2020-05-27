@@ -1,0 +1,34 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Sous catégories
+{% endblock %}
+
+{% block body %}
+
+	<div class="container-fluid h-100 my-4">
+		<div class="row h-100">
+			{% include 'admin/partials/aside.html.twig' %}
+			<main class="col">
+				<!-- Insérez ici le contenu principal du site ou de l'application -->
+				<div class="container">
+					<div class="row">
+						<div class="col-md-auto">
+							{% if category.name != '' %}
+								<h3>Edition de la sous-catégorie</h3>
+							{% else %}
+								<h3>Ajout de sous-catégorie</h3>
+							{% endif %}
+							{{ form_start(form) }}
+							{{ form_row(form.Name) }}
+							{{ form_row(form.Introduction) }}
+							{{ form_row(form.Image) }}
+							{{ form_row(form.Parent) }}
+							<button type="submit">save</button>
+							{{ form_end(form) }}
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+{% endblock %}
