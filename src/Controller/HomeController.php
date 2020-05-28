@@ -12,22 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 
 
-class DecorationWebsiteController extends AbstractController
+class HomeController extends AbstractController
 {
-    /** 
-     * @Route("/decoration_website", name="decoration_website")
-     */
-    public function categories()
-    {
-        $repo = $this->getDoctrine()->getRepository(Category::class);
-        $categories = $repo->findBy(['parent' => null]);
-
-            return $this->render('decoration_website/categories/categories.html.twig', [
-                'controller_name' => 'DecorationWebsiteController',
-                'categories' => $categories
-            ]);
-    }
-
     /**
      * @Route("/decoration_website/{id_category}", name="decoration_website_subcategories")
      */
@@ -67,13 +53,14 @@ class DecorationWebsiteController extends AbstractController
         $product = $repo->find($id_product);
 
         return $this->render('decoration_website/products/product.html.twig', [
-            'controller_name' => 'DecorationWebsiteController',
             'product' => $product,
 
         ]);
     }
 
     /**
+     * (route non utilisée par navigation)
+     * 
      * @Route("/decoration_website/product/{id_product}", name="decoration_website_product_by_id")
      */
     public function show_product_by_id($id_product) {
@@ -82,9 +69,7 @@ class DecorationWebsiteController extends AbstractController
         $product = $repo->find($id_product);
 
         return $this->render('decoration_website/products/product.html.twig', [
-            'controller_name' => 'DecorationWebsiteController',
             'product' => $product,
-
         ]);
     }
 
@@ -99,10 +84,9 @@ class DecorationWebsiteController extends AbstractController
         $catRepo = $this->getDoctrine()->getRepository(Category::class);
         $categories = $catRepo->findAll();
 
-        return $this->render('decoration_website/products/HomeProducts.html.twig', [
+        return $this->render('decoration_website/home/index.html.twig', [
             'products'        => $products,
             'categories'      => $categories,
-            'controller_name' => 'DecorationWebsiteController',
         ]);
     }
 

@@ -17,7 +17,7 @@ class RegistrationType extends AbstractType
             ->add('password', PasswordType::class)
             ->add('confirm_password', PasswordType::class)
             ->add('email')
-            //->add('role')
+            //->add('role') = non : on le gère seulement dans l'admin
         ;
     }
 

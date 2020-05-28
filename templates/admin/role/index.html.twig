@@ -1,0 +1,47 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Role index{% endblock %}
+
+{% block body %}
+{% include 'admin/partials/container-avant-section.html.twig' %}
+
+    <h1>Gestion des rôles</h1>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for role in roles %}
+                <tr>
+                    <td>{{ role.id }}</td>
+                    <td>{{ role.title }}</td>
+                    <td>
+                        <a href="{{ path('role_show', {'id': role.id}) }}" class="btn btn-secondary" title="voir le détail du rôle">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="{{ path('role_edit', {'id': role.id}) }}" class="btn btn-primary" title="éditer le rôle">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row pb-3 pl-4">
+        <a href="{{ path('role_new') }}" class="btn btn-primary">Créer un nouveau rôle</a>
+    </div>
+
+{% include 'admin/partials/container-apres-section.html.twig' %}
+{% endblock %}

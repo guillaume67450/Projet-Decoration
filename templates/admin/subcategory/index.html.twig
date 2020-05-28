@@ -6,13 +6,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container-fluid h-100 my-4">
-		<div class="row h-100">
-			{% include 'admin/partials/aside.html.twig' %}
-			<main
-				class="col">
-				<!-- Insérez ici le contenu principal du site ou de l'application -->
-
+{% include 'admin/partials/container-avant-section.html.twig' %}
 				<section class="subcategories">
 
 					<h2>Gestion des sous-catégories</h2>
@@ -65,7 +59,5 @@
 						</table>
 					</div>
 				</section>
-            </main>
-        </div>
-    </div>
+{% include 'admin/partials/container-apres-section.html.twig' %}
 {% endblock %}

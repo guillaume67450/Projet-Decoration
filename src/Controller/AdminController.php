@@ -8,13 +8,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminController extends AbstractController
 {
     /**
+     * redirection vers admin/dashboard qui est l'accueil de l'admin
+     * 
      * @Route("/admin", name="admin")
      */
     public function index()
     {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
+        return $this->redirectToRoute('admin_dashboard');
     }
 
     /**
