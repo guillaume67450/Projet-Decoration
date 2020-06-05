@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Service\PaginationService;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,18 +16,21 @@ class AdminProductController extends AbstractController
 {
 
     /**
-     * @Route("/admin/products", name="admin_products_index")
+     * @Route("/admin/products/{page<\d+>?1}", name="admin_products_index")
+     * 
+     * on met des inline requirements \d+ (le décimal + indique qu'on peut mettre un nombre et pas seulement un chiffre)
+     * le ? veut dire que c'est optionnel, 1 est la valeur par défaut si pas renseigné
      */
-    public function index()
+    public function index($page, PaginationService $pagination)
     {
-
-        $repo = $this->getDoctrine()->getRepository(Product::class);
-        $products = $repo->findAll();
+        $pagination ->setEntityClass(Product::class)
+                    ->setPage($page);
 
         return $this->render('admin/product/index.html.twig', [
-            'products' => $products,
+            'pagination'=> $pagination
         ]);
     }
+
 
     /**
      * @Route("/admin/product", name="addProduct")

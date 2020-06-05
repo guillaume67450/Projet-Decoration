@@ -12,7 +12,6 @@
                                 <h2>Gestion des produits</h2>
                                 <div class="table-responsive">
                                     <table class="table table-hover">
-                                        {% if products is defined %}
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
@@ -24,41 +23,38 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                     
+                                            {% for product in pagination.data %}
 
-                                            
-                                                {% for product in products %}
 
-
-                                                    <tr>
-                                                        <td>{{product.id}}</td>
-                                                        <td>{{product.title}}</td>
-                                                        <td>{{product.brand}}</td>
-                                                        <td>{{product.price}}</td>
-                                                        <td>
-                                                            <img src="{{product.image}}" alt="Image de {{product.title}}" class="miniature">
-                                                        </td>
-                                                        <td>
-                                                            {# id : la variable vient de la route @Route("/{id}/edit", name="categoryForm", methods={"POST"}) #}
-                                                            <!--a href="{#{ path('productForm', {id : category.id, type : 'category'}) }#}" class="btn btn-secondary">
-                                                                <i class="fas fa-plus"></i>
-                                                            </a-->
-                                                            {# id : la variable vient de la route @Route("/{id}/edit", name="categoryForm", methods={"POST"}) #}
-                                                            <a href="{{ path('admin_products_edit', {'id': product.id})}}" class="btn btn-primary" title="éditer le produit {{ product.title }}">
-                                                                <i class="fas fa-edit"></i>
-                                                            </a>
-                                                            <a href="{{ path('admin_products_delete', {'id': product.id})}}" class="btn btn-danger" title="supprimer le produit {{ product.title }}">
-                                                                <i class="fas fa-trash-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                            {% else %}
-                                            <h3>Pas de produit sélectionné</h3>
-
-                                            {% endif %}
+                                                <tr>
+                                                    <td>{{product.id}}</td>
+                                                    <td>{{product.title}}</td>
+                                                    <td>{{product.brand}}</td>
+                                                    <td>{{product.price}}</td>
+                                                    <td>
+                                                        <img src="{{product.image}}" alt="Image de {{product.title}}" class="miniature">
+                                                    </td>
+                                                    <td>
+                                                        {# id : la variable vient de la route @Route("/{id}/edit", name="categoryForm", methods={"POST"}) #}
+                                                        <!--a href="{#{ path('productForm', {id : category.id, type : 'category'}) }#}" class="btn btn-secondary">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a-->
+                                                        {# id : la variable vient de la route @Route("/{id}/edit", name="categoryForm", methods={"POST"}) #}
+                                                        <a href="{{ path('admin_products_edit', {'id': product.id})}}" class="btn btn-primary" title="éditer le produit {{ product.title }}">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <a href="{{ path('admin_products_delete', {'id': product.id})}}" class="btn btn-danger" title="supprimer le produit {{ product.title }}">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
                             </section>
 {% include 'admin/partials/container-apres-section.html.twig' %}
+
+{{ pagination.display() }}
 {% endblock %}

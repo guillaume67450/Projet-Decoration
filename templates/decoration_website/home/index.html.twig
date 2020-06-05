@@ -254,8 +254,7 @@
 	<h1 class="text-center">Sélection de Produits</h1>
 
 	<div id="columns" class="columns_4">
-		{% if products is defined %}
-			{% for product in products|slice(1, 16) %}
+			{% for product in pagination.data|slice(0, 30) %}
 				<figure>
 					<img src="{{ product.image }}" alt="{{ product.title }}">
 					<figcaption>{{ product.title }}</figcaption>
@@ -264,8 +263,9 @@
 					<a class="button btn-primary" href="#">Acheter</a>
 				</figure>
 			{% endfor %}
-		{% endif %}
 	</div>
+
+	{{ pagination.display() }}
 
 {% endblock %}
 {% block javascripts %}

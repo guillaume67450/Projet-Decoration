@@ -2,14 +2,17 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
 use App\Entity\Category;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\HttpFoundation\Response;
+use App\Service\PaginationService;
+use App\Repository\ProductRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class HomeController extends AbstractController
@@ -73,20 +76,22 @@ class HomeController extends AbstractController
         ]);
     }
 
-    /** 
-     * @Route("/", name="home")
+    /**
+     * @Route("/{page<\d+>?1}", name="home")
+     * 
+     * on met des inline requirements \d+ (le décimal + indique qu'on peut mettre un nombre et pas seulement un chiffre)
+     * le ? veut dire que c'est optionnel, 1 est la valeur par défaut si pas renseigné
      */
-    public function accueilSite()
+    public function accueilSite($page, CategoryRepository $catRepo, PaginationService $pagination)
     {
-        $repo = $this->getDoctrine()->getRepository(Product::class);
-        $products = $repo->findAll();
-
-        $catRepo = $this->getDoctrine()->getRepository(Category::class);
         $categories = $catRepo->findAll();
 
+        $pagination ->setEntityClass(Product::class)
+                    ->setPage($page);
+
         return $this->render('decoration_website/home/index.html.twig', [
-            'products'        => $products,
-            'categories'      => $categories,
+            'pagination'=> $pagination,
+            'categories'=> $categories,
         ]);
     }
 
