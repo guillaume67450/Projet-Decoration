@@ -104,7 +104,12 @@
                                                 <a href={{ path('decoration_website_product', {id_category : id_parent_category, id_sub_category : product.category.id, id_product : product.id }) }}>
                                                     page du produit
                                                 </a>
+																<a href="{{ path('cart_add', {'id': product.id}) }}" class="btn btn-success float-right">
+																		<i class="fas fa-shopping-cart mr-1"></i>
+																		Ajouter
+																</a>
                                         </div>
+
                                         <!--/.Card content-->
 
                                     </div>
