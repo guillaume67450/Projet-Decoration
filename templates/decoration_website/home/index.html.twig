@@ -26,7 +26,9 @@
 								{% if category.parent is null %}
 									<a class="list-group-item" href="{{ path('decoration_website_subcategories', {'id_category': category.id}) }}">{{ category.name }}</a>
 								{% else %}
-								<a class="list-group-item" href="{{ path('decoration_website_products', {id_category : category.parent.id, id_sub_category : category.id }) }}">{{ category.name }} <small>({{category.parent.name}})</small></a>
+									<a class="list-group-item" href="{{ path('decoration_website_products', {id_category : category.parent.id, id_sub_category : category.id }) }}">{{ category.name }}
+										<small>({{category.parent.name}})</small>
+									</a>
 								{% endif %}
 							{% endfor %}
 						</div>
@@ -254,15 +256,18 @@
 	<h1 class="text-center">Sélection de Produits</h1>
 
 	<div id="columns" class="columns_4">
-			{% for product in pagination.data|slice(0, 30) %}
-				<figure>
-					<img src="{{ product.image }}" alt="{{ product.title }}">
-					<figcaption>{{ product.title }}</figcaption>
-					<span class="price">{{ product.price }}
-						€</span>
-					<a class="button btn-primary" href="#">Acheter</a>
-				</figure>
-			{% endfor %}
+		{% for product in pagination.data|slice(0, 30) %}
+			<figure>
+				<img src="{{ product.image }}" alt="{{ product.title }}">
+				<figcaption>{{ product.title }}</figcaption>
+				<span class="price">{{ product.price }}
+					€</span>
+				<a href="{{ path('cart_add', {'id': product.id}) }}" class="btn btn-success float-right">
+					<i class="fas fa-shopping-cart mr-1"></i>
+					Ajouter
+				</a>
+			</figure>
+		{% endfor %}
 	</div>
 
 	{{ pagination.display() }}
