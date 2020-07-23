@@ -13,7 +13,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class HomeController extends AbstractController
 {
@@ -86,12 +86,15 @@ class HomeController extends AbstractController
     {
         $categories = $catRepo->findAll();
 
+        $subcategories = $catRepo->findByParentNotNull();
+
         $pagination ->setEntityClass(Product::class)
                     ->setPage($page);
 
         return $this->render('decoration_website/home/index.html.twig', [
-            'pagination'=> $pagination,
-            'categories'=> $categories,
+            'pagination'    => $pagination,
+            'categories'    => $categories,
+            'subcategories'    => $subcategories,
         ]);
     }
 

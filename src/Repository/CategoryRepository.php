@@ -6,6 +6,7 @@ use App\Entity\Category;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  * @method Category|null find($id, $lockMode = null, $lockVersion = null)
@@ -35,6 +36,35 @@ class CategoryRepository extends ServiceEntityRepository
         // Execute query
         return $qb->getQuery()->getResult();
     }
+
+    public function findByParentNotNull()
+    {
+        $qb = $this->createQueryBuilder('c')
+        ->where('c.parent > :parent')
+        ->setParameter('parent', 0)
+        ->orderBy('c.Name', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findAllGreaterThanPrice($price, $includeUnavailableProducts = false): array
+    {
+    // automatically knows to select Products
+    // the "p" is an alias you'll use in the rest of the query
+    $qb = $this->createQueryBuilder('p')
+        ->where('p.price > :price')
+        ->setParameter('price', $price)
+        ->orderBy('p.price', 'ASC');
+
+    if (!$includeUnavailableProducts) {
+        $qb->andWhere('p.available = TRUE');
+    }
+
+    $query = $qb->getQuery();
+
+    return $query->execute();
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Category
