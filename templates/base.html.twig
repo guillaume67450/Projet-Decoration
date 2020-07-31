@@ -55,7 +55,8 @@
         {% block body %}{% endblock %}
 
         {% include 'admin/partials/footer.html.twig' %}   
-
+        <script src="{{ asset('build/js/app.js') }}.js"></script>
+        {{ encore_entry_script_tags('app') }}
         {% block javascripts %} 
         {# bloc qui contient les scripts du template de base pour les visiteurs #}
             {# jQuery #}

@@ -23,7 +23,7 @@
 						<br>
 						<div class="list-group">
 							{% for category in categories if category.parent is null %}
-									<a class="list-group-item" href="{{ path('decoration_website_subcategories', {'id_category': category.id}) }}">{{ category.name }}</a>
+									<h4 class="pt-3"><a class="list-group-item" href="{{ path('decoration_website_subcategories', {'id_category': category.id}) }}">{{ category.name }}</a></h4>
 								{% for subcategory in subcategories if subcategory.parent is defined %}
 									{% if (category.id == subcategory.parent.id) %} <a class="list-group-item pl-5" href="{{ path('decoration_website_products', {'id_category' : subcategory.parent.id, 'id_sub_category' : subcategory.id }) }}">{{ subcategory.name }}
 										<small>({{subcategory.parent.name}})</small>
