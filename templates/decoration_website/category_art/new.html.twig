@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CategoryArt{% endblock %}
+
+{% block body %}
+    <h1>Create new CategoryArt</h1>
+
+    {{ include('category_art/_form.html.twig') }}
+
+    <a href="{{ path('category_art_index') }}">back to list</a>
+{% endblock %}

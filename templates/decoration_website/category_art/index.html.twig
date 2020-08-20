@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategoryArt index{% endblock %}
+
+{% block body %}
+    <h1>CategoryArt index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category_art in category_arts %}
+            <tr>
+                <td>{{ category_art.id }}</td>
+                <td>{{ category_art.name }}</td>
+                <td>{{ category_art.slug }}</td>
+                <td>
+                    <a href="{{ path('category_art_show', {'id': category_art.id}) }}">show</a>
+                    <a href="{{ path('category_art_edit', {'id': category_art.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('category_art_new') }}">Create new</a>
+{% endblock %}

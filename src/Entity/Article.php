@@ -2,14 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(
+ *  fields={"title"},
+ *  message="une autre annonce possède déjà ce titre, merci de le modifier"
+ * )
  */
+
 class Article
 {
     /**
@@ -25,7 +33,7 @@ class Article
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
 
@@ -77,9 +85,47 @@ class Article
         $this->categoryArt = new ArrayCollection();
     }
 
+
+    /**
+     * Permet d'initialiser le slug !
+     * 
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     * @return void
+     */
+    public function initializeSlug() {
+        if (empty($this->slug)) {
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->title);
+        }
+    }
+    
+    /**
+     * Permet de mettre en place la date de création (et la date de mise à jour quand on update)
+     * 
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     * @return void
+     */
+    public function prePersist() {
+        if(empty($this->created_at)) {
+            $this->created_at = new \DateTime();
+        }
+        else {
+            $this->updated_at = new \DateTime();
+        }
+    }
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 
     public function getTitle(): ?string

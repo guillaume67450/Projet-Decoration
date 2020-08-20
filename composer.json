@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "artgris/media-bundle": "5.2.8",
+        "cocur/slugify": "^4.0",
         "fortawesome/font-awesome": "^5.9",
         "fzaninotto/faker": "^1.8",
         "ninsuo/symfony-collection": "^2.1",

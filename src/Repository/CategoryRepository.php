@@ -21,7 +21,7 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
-    public function findByParentNull($executed = false)
+    public function findByParentNotNull($executed = false)
     {
         // Add a not equals parameter to your criteria
         $criteria = new Criteria();
@@ -34,16 +34,6 @@ class CategoryRepository extends ServiceEntityRepository
             return $qb;
 
         // Execute query
-        return $qb->getQuery()->getResult();
-    }
-
-    public function findByParentNotNull()
-    {
-        $qb = $this->createQueryBuilder('c')
-        ->where('c.parent > :parent')
-        ->setParameter('parent', 0)
-        ->orderBy('c.Name', 'ASC');
-
         return $qb->getQuery()->getResult();
     }
 

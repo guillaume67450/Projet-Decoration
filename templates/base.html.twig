@@ -55,7 +55,7 @@
         {% block body %}{% endblock %}
 
         {% include 'admin/partials/footer.html.twig' %}   
-        <script src="{{ asset('build/js/app.js') }}.js"></script>
+        <script src="{{ asset('build/app') }}.js"></script>
         {{ encore_entry_script_tags('app') }}
         {% block javascripts %} 
         {# bloc qui contient les scripts du template de base pour les visiteurs #}
@@ -64,6 +64,7 @@
             {#  Bootstrap #}
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         {% endblock %}
     </body>
 </html>

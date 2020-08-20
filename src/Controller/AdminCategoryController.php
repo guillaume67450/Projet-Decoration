@@ -114,7 +114,7 @@ class AdminCategoryController extends AbstractController
         if ($category)
             $categories = $repo->findBy(['parent' => $category->getId()]);
         else
-            $categories = $repo->findByParentNull(true);
+            $categories = $repo->findByParentNotNull(true);
 
         return $this->render('admin/subcategory/index.html.twig', [
             'categories' => $categories,

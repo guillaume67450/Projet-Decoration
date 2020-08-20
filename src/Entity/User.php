@@ -63,6 +63,11 @@ class User implements UserInterface
      */
     private $articles;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $newsletter;
+
     public function __construct()
     {
         $this->userRoles = new ArrayCollection();
@@ -70,8 +75,17 @@ class User implements UserInterface
         $this->articles = new ArrayCollection();
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
-    public function getUsername(): ?string
+    public function __toString()
+    {
+        return $this->username;
+    }
+
+    public function getUsername()//: ?string
     {
         return $this->username;
     }
@@ -212,4 +226,17 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getNewsletter(): ?bool
+    {
+        return $this->newsletter;
+    }
+
+    public function setNewsletter(?bool $newsletter): self
+    {
+        $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
 }

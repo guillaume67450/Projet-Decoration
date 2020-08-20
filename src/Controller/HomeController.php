@@ -23,12 +23,12 @@ class HomeController extends AbstractController
     public function subcategories($id_category) {
 
         $repo = $this->getDoctrine()->getRepository(Category::class);
-        $categorie = $repo->find($id_category);
+        $category = $repo->find($id_category);
         $subcategories = $repo->findBy(['parent' => $id_category]);
 
         return $this->render('decoration_website/categories/subcategories.html.twig', [
             'categories'    => $subcategories,
-            'categorie'      => $categorie
+            'category'      => $category
         ]);
     }
 
@@ -86,7 +86,7 @@ class HomeController extends AbstractController
     {
         $categories = $catRepo->findAll();
 
-        $subcategories = $catRepo->findByParentNotNull();
+        $subcategories = $catRepo->findByParentNotNull(true);
 
         $pagination ->setEntityClass(Product::class)
                     ->setPage($page);

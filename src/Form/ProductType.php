@@ -5,58 +5,27 @@ namespace App\Form;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Validator\Constraints\File;
-
 use Artgris\Bundle\MediaBundle\Form\Type\MediaType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Artgris\Bundle\MediaBundle\Form\Type\MediaCollectionType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use App\Form\ApplicationType;
 
-class ProductType extends AbstractType
+class ProductType extends ApplicationType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
-
-        /*
-->add('Photos', FileType::class, [
-                'label' => 'Photo (jpg ou jpeg)',
-
-                // unmapped means that this field is not associated to any entity property
-                'mapped' => false,
-
-                // make it optional so you don't have to re-upload the image
-                // everytime you edit the Product details
-                'required' => false,
-
-                // unmapped fields can't define their validation using annotations
-                // in the associated entity, so you can use the PHP constraint classes
-                'constraints' => [
-                    new File([
-                        'maxSize' => '8000k',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/jpg',
-                            'image/gif',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid image',
-                    ])
-                ],
-            ])
-            // ...
-            //, FileType::class, [    'label' => 'Photos (image jpg ou jpeg)',   'multiple' => true  ])
-            // ->add('Photos', FileType::class, ['label' => 'Photos (image jpg ou jpeg)'])
-
-        */
         $builder
-            ->add('Title')
-            ->add('Brand')
-            ->add('Description')
-            ->add('Price')
-            ->add('URLaffiliation')
+            ->add('Title', TextType::class, $this->getConfiguration("Titre", "saisir le titre du produit"))
+            ->add('Brand', TextType::class, $this->getConfiguration("Marque" , "saisir la marque du produit"))
+            ->add('Description', TextAreaType::class, $this->getConfiguration("Description" , "saisir la description du produit"))
+            ->add('Price', NumberType::class, $this->getConfiguration("Prix" , "saisir le prix du produit"))
+            ->add('URLaffiliation', UrlType::class, $this->getConfiguration("URL affiliation" , "saisir url affialiation du produit"))
             ->add('Image', MediaType::class, [
                 'conf' => 'default'
             ])
@@ -70,7 +39,7 @@ class ProductType extends AbstractType
                 // looks for choices from this entity
                 'class' => Category::class,
                 'query_builder' => function (CategoryRepository $cr) {
-                    return $cr->findByParentNull();
+                    return $cr->findByParentNotNull();
                 },
                 // uses the Category.name property as the visible option string
                 'choice_label' => 'name',

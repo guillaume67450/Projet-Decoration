@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
+
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Comment
 {
@@ -25,28 +28,41 @@ class Comment
     /**
      * @ORM\Column(type="boolean")
      */
-    private $active;
+    private $active = true;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $created_at;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $rgpd;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
+
+    /**
+     * Permet de mettre en place la date de création
+     * 
+     * @ORM\PrePersist
+     * 
+     * @return void
+     */
+    public function prePersist() {
+        if(empty($this->created_at)) {
+            $this->created_at = new \DateTime();
+        }
+    }
 
     public function getId(): ?int
     {

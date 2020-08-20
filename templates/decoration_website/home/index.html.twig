@@ -22,11 +22,12 @@
 						<h4>Catégories :</h4>
 						<br>
 						<div class="list-group">
+
 							{% for category in categories if category.parent is null %}
 									<h4 class="pt-3"><a class="list-group-item" href="{{ path('decoration_website_subcategories', {'id_category': category.id}) }}">{{ category.name }}</a></h4>
 								{% for subcategory in subcategories if subcategory.parent is defined %}
-									{% if (category.id == subcategory.parent.id) %} <a class="list-group-item pl-5" href="{{ path('decoration_website_products', {'id_category' : subcategory.parent.id, 'id_sub_category' : subcategory.id }) }}">{{ subcategory.name }}
-										<small>({{subcategory.parent.name}})</small>
+									{% if (category.id == subcategory.parent.id) %} 
+									<a class="list-group-item pl-5" href="{{ path('decoration_website_products', {'id_category' : subcategory.parent.id, 'id_sub_category' : subcategory.id }) }}">{{ subcategory.name }}
 									</a>
 									{% endif %}
 								{% endfor %}
@@ -35,26 +36,18 @@
 					</div>
 
 					<div class="widget-wrapper wow fadeIn" data-wow-delay="0.4s">
-						<h4>Formulaire de souscription :</h4>
+						<h4 class="text-center">Formulaire de souscription :</h4>
 						<br>
 						<div class="card">
 							<div class="card-block">
-								<p>
+								<p  class="text-center">
 									<strong>Souscrivez à notre bulletin hebdmadaire</strong>
 								</p>
-								<p>Une fois par semaine nous vous enverrons un récapitulatif des promotions et des actualités</p>
-								<div class="md-form">
-									<i class="fa fa-user prefix"></i>
-									<input type="text" id="form1" class="form-control">
-									<label for="form1">Votre nom</label>
-								</div>
-								<div class="md-form">
-									<i class="fa fa-envelope prefix"></i>
-									<input type="text" id="form2" class="form-control">
-									<label for="form2">Votre email</label>
-								</div>
-								<button class="btn btn-default">Envoyer</button>
+								<p class="text-center">Une fois par mois nous vous enverrons un récapitulatif des promotions et des actualités</p>
 
+								<div class="text-center">
+									<button class="btn btn-primary">Je veux recevoir la newsletter</button>
+								</div>
 							</div>
 						</div>
 					</div>

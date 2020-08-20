@@ -1,0 +1,23 @@
+{% extends 'baseblog.html.twig' %}
+
+{% block title %}Edit Comment
+{% endblock %}
+
+{% block body %}
+
+	{% include 'decoration_website/article/blognavbar.html.twig' %}
+
+	<div class="wrap">
+
+		<h1 class="pt-5">Edition du commentaire</h1>
+
+		{{ include('decoration_website/comment/_form.html.twig', {'button_label': 'Mise à jour'}) }}
+
+        {{ include('decoration_website/comment/_delete_form.html.twig') }}
+
+		<a href="{{ path('article_index') }}">Revenir à la liste des articles de blog</a>
+
+		
+
+	</div>
+{% endblock %}
